@@ -8,6 +8,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class Waklker : MonoBehaviour
     {
+        public Respawn poli;
         public Rigidbody rigibody;
         public float walkSpeed;
         public float accel = 0.1f;
@@ -15,15 +16,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public CharacterController player;
         public Vector3 center;
         public float height;
+        private float timer;
+        public float fallHeight;
+        public float deathFall;
+        public bool falling;
         // Start is called before the first frame update
         void Start()
         {
+            
             walkSpeed = e.m_WalkSpeed;
             player = GetComponent<CharacterController>();
             height = player.height;
             center = player.center;
             walkSpeed = e.m_WalkSpeed;
-
+            
         }
 
         // Update is called once per frame
@@ -75,8 +81,40 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 player.center = new Vector3(player.center.x, 0.6f, player.center.z);
                 player.height = 1.2f;
+                if (IsInvoking("GetUp"))
+                {
+                    CancelInvoke("GetUp");
+                }
                 Invoke("GetUp", 1f);
             }
+            
+            if (player.isGrounded)
+            {
+                if (fallHeight - deathFall > transform.position.y)
+                {
+                    poli.Death();
+                }
+
+                fallHeight = transform.position.y;
+                falling = false;
+                
+            }
+            else if (!falling)
+            {
+                fallHeight = transform.position.y;
+                falling = true;
+            }
+           /* if (!player.isGrounded)   falldamage test 1
+            {
+                timer += Time.deltaTime;
+                
+            }
+            else
+            {
+                if (timer>=2f)
+                    Debug.Log("death");
+               timer = 0;
+            }*/
         }
 
         public void GetUp()

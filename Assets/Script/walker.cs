@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class walker : MonoBehaviour
 {
+    public 
     // Start is called before the first frame update
     void Start()
     {
