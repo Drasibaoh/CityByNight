@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Platform_Weak : MonoBehaviour
 {
+    public float stay = 2.0f;
+    public GameObject Plateforme;
+    public bool Go = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,21 +16,28 @@ public class Platform_Weak : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Go == true)
+        {
+            stay -= 1.0f * Time.deltaTime;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Collision");
-        if (other.CompareTag("Player"))
+        Go = true;
+        if(stay <= 0)
         {
-            Invoke("Disappear", 1.5f);
+            if (other.CompareTag("Player"))
+            {
+                Invoke("Disappear", 1.5f);
+            }
         }
+        
     }
 
     public void Disappear()
     {
-       this.gameObject.SetActive(false);
+       Plateforme.SetActive(false);
     }
 }
 
