@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
+        private ControllerAddon m_ControllerAddon;
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -46,6 +47,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
+            m_ControllerAddon = GetComponent<ControllerAddon>();
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -116,10 +118,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (m_Jump)
                 {
-                    m_MoveDir.y = m_JumpSpeed;
+                    if (m_ControllerAddon.isSliding)
+                    {
+                        m_ControllerAddon.GetUp();
+                        m_ControllerAddon.CancelInvoke("GetUp");
+                        m_MoveDir.y = m_JumpSpeed+2;
+                    }
+                    else 
+                        m_MoveDir.y = m_JumpSpeed;
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
+                    Debug.Log(m_MoveDir.y);
                 }
             }
             else

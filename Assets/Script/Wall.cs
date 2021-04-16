@@ -7,7 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     {
         float x;
         float z;
-        public Waklker actor;
+        public ControllerAddon actor;
         // Start is called before the first frame update
         void Start()
         {
@@ -21,8 +21,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         private void OnTriggerEnter(Collider other)
         {
-            actor = other.GetComponent<Waklker>();
-            actor.e.m_GravityMultiplier=0;
+            actor = other.GetComponent<ControllerAddon>();
+            actor.fpControler.m_GravityMultiplier=0;
             x = actor.rigibody.velocity.x;
             z = actor.rigibody.velocity.z;
             
@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void GetOnGround()
         {
-            actor.e.m_GravityMultiplier = 2;
+            actor.fpControler.m_GravityMultiplier = 2;
 
         }
         private void OnTriggerExit(Collider other)
@@ -41,7 +41,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 CancelInvoke();
             }
 
-            actor.e.m_GravityMultiplier = 2;
+            actor.fpControler.m_GravityMultiplier = 2;
         }
     }
 }
