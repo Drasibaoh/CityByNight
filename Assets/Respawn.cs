@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
@@ -25,6 +26,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             player.transform.position = transform.position;
             player.transform.rotation = transform.rotation;
+           // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

@@ -21,18 +21,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float fallHeight;
         public float deathFall;
         public bool falling;
-        public int DopeCount=3;
+        public int DopeCount = 3;
         public bool isSliding;
+        public bool headBlock;
         // Start is called before the first frame update
         void Start()
         {
-            
+
             walkSpeed = fpControler.m_WalkSpeed;
             player = GetComponent<CharacterController>();
             height = player.height;
             center = player.center;
             walkSpeed = fpControler.m_WalkSpeed;
-            
+
         }
 
         // Update is called once per frame
@@ -149,6 +150,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                      Debug.Log("death");
                 timer = 0;
              }*/
+            if (headBlock)
+            {
+                GetUp();
+                Debug.Log("yo");
+            }
         }
         public void DopeTime()
         {
@@ -171,7 +177,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             fpControler.m_RunSpeed += 4;
             fpControler.m_JumpSpeed += 2;
         }
-        public void Slide() 
+        public void Slide()
         {
             fpControler.m_WalkSpeed += 2;
             fpControler.m_RunSpeed = 17;
@@ -181,14 +187,30 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void GetUp()
         {
-            walkSpeed = 5;
-            fpControler.m_WalkSpeed = walkSpeed;
-            fpControler.m_RunSpeed = 15;
-            player.center = center;
-            slidetime = 0;
-            player.height = height;
-            isSliding = false;
+            int layerMask = 1;
+            RaycastHit Hit;
+            if (Physics.Raycast(transform.position, new Vector3(0, 1, 0), out Hit, 3, layerMask))
+            {
+
+                Debug.DrawRay(transform.position, transform.up * Hit.distance, Color.red);
+                Debug.Log("hit" + Hit.collider.tag);
+                headBlock = true;
+
+            }
+            else
+            {
+
+                    walkSpeed = 5;
+                    fpControler.m_WalkSpeed = walkSpeed;
+                    fpControler.m_RunSpeed = 15;
+                    player.center = center;
+                    slidetime = 0;
+                    player.height = height;
+                    isSliding = false;
+                    headBlock = false;
+            }
         }
+
     }
 }
 

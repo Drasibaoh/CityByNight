@@ -60,5 +60,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             }
         }
+
     }
+
 }

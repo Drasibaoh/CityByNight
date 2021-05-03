@@ -7,6 +7,7 @@ TagManager:
   - Livraison1
   - Livraison2
   - Livraison3
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
