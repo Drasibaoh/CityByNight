@@ -23,6 +23,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Death()
         {
+            GameManager.instance.restart.Invoke();
             player.SetActive(false);
             player.transform.position = transform.position;
             player.transform.rotation = transform.rotation;

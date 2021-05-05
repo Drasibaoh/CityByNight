@@ -6,6 +6,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class FaillingLight : MonoBehaviour
     {
+
         public GameObject droneLight;
         public float offTime = 1f;
         public float onTime = 2f;
@@ -41,6 +42,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     off = !off;
                 }
             }
+        }
+        public void Return()
+        {
+
         }
     }
 }

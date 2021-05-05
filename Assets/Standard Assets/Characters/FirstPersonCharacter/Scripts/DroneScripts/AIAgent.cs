@@ -12,9 +12,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Transform[] path;
         public float minDistBeforePathChange = 0.5f;
         public Transform target;
+        private Transform orPos;
         [HideInInspector] public Vector3 targetLastPos;
 
-
+        public AIAgent save;
         private FSM m_fsm = null;
 
         public NavMeshAgent navAgent { get; private set; }
@@ -32,6 +33,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             this.m_fsm.AddState(new AIStateOnLoseSight());
 
             this.m_fsm.ChangeState(StateNames.AI_PATROL);
+            orPos = transform;
         }
 
         // Update is called once per frame
@@ -59,6 +61,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
 
             }
+        } 
+        public void Return()
+        {
+            m_fsm.ChangeState(StateNames.AI_PATROL);
         }
 
     }

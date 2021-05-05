@@ -22,10 +22,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
-                ControllerAddon yolo= other.GetComponent<ControllerAddon>();
-                yolo.player.center = new Vector3(yolo.player.center.x, 0.6f, yolo.player.center.z);
-                yolo.player.height = 1.2f;
-                yolo.isSliding = true;
+                ControllerAddon addOn= other.GetComponent<ControllerAddon>();
+                addOn.player.center = new Vector3(addOn.player.center.x, 0.6f, addOn.player.center.z);
+                addOn.player.height = 1.2f;
+                addOn.isSliding = true;
             }
         }
         private void OnTriggerExit(Collider other)

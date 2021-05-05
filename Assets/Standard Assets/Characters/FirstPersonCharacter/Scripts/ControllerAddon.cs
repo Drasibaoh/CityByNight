@@ -39,7 +39,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
-
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                GameManager.instance.restart.Invoke();
+            }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -113,6 +116,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 if (fallHeight - deathFall > transform.position.y)
                 {
+                    Debug.Log("eee");
                     respawnPoint.Death();
                 }
 

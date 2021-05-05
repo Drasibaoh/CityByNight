@@ -28,8 +28,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 return;
             }
 
-            if (state == this.curr)
-                return; // already in this state
+
 
             if (this.curr != null)
             {

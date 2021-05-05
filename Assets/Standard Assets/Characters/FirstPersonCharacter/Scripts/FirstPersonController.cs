@@ -129,7 +129,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
-                    Debug.Log(m_MoveDir.y);
+
                 }
             }
             else

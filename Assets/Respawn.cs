@@ -24,7 +24,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Death()
         {
-            player.transform.position = transform.position;
+            Debug.Log("ye");
+            GameManager.instance.restart.Invoke();
+           // player.transform.position = transform.position;
             player.transform.rotation = transform.rotation;
            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
