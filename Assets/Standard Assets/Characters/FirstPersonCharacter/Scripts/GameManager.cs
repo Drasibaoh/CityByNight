@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.SceneManagement;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class GameManager : MonoBehaviour
     {
         public UnityEvent restart;
-
+        public bool end=false;
+        private float timer=0;
         public static GameManager instance;
         public List<GameObject> obj;
         public int delivered = 0;
@@ -33,7 +34,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
-
+            if (end)
+            {
+                timer += Time.deltaTime;
+                if (timer >= 2)
+                {
+                    Debug.Log("fondu");
+                    //SceneManager.LoadScene(2);
+                    end = false;
+                }
+            }
         }
         public void ChangeObjectif()
         {
@@ -51,7 +61,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
                 Debug.Log("ggwp");
+                end = true;
                 obj[delivered - 1].SetActive(false);
+
             }
 
         }
