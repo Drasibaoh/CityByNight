@@ -20,11 +20,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         void Update()
         {
             if (isIn && Input.GetKeyDown(KeyCode.Space) && !jump)
+                
+            {
+                if (actor.walljumps > 0)
                 {
+                    actor.walljumps--;
                     Debug.Log(actor.fpControler.m_MoveDir);
                     actor.fpControler.m_MoveDir.y = actor.fpControler.m_JumpSpeed;
                     jump = true;
+                actor.falling = true;
+                actor.fallHeight = transform.position.y;
                 }
+                
+            }
             
         }
         private void OnTriggerEnter(Collider other)

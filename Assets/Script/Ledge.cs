@@ -7,6 +7,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
     {
         public Transform standPoint;
         public float imp=1;
+        bool canReach;
+        ControllerAddon player;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,17 +18,28 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
-
+            if (canReach)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                player.fpControler.m_CharacterController.Move(Vector3.up * imp);
+            }
         }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
+                player = other.GetComponent<ControllerAddon>();
                 Debug.Log("tagged");
                 //play anim
-                other.gameObject.GetComponent<ControllerAddon>().fpControler.m_CharacterController.Move(Vector3.up*imp);
+                canReach = true;
+                if (player.fpControler.m_MoveDir.y>=0)
+                    player.fpControler.m_CharacterController.Move(Vector3.up*imp);
                 Debug.Log("pushed");
             }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            canReach = false;
         }
     }
 }

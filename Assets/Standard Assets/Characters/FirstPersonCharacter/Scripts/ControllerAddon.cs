@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class ControllerAddon : MonoBehaviour
@@ -25,16 +27,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool isSliding;
         public bool headBlock;
         public bool isOnWall;
+        public PostProcessVolume iaia;
+        public PostProcessVolume iaia2;
+        bool isDope;
+        public int walljumps;
+        int maxwalljumps = 3;
+        float t;
         // Start is called before the first frame update
         void Start()
         {
-
+            walljumps = maxwalljumps;
             walkSpeed = fpControler.m_WalkSpeed;
             player = GetComponent<CharacterController>();
             height = player.height;
             center = player.center;
             walkSpeed = fpControler.m_WalkSpeed;
-
+            for (int i = 0; i < iaia.profile.settings.Count; i++)
+                Debug.Log(iaia.profile.settings[i].name);
         }
 
         // Update is called once per frame
@@ -120,10 +129,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     Debug.Log("eee");
                     respawnPoint.Death();
                 }
-
                 fallHeight = transform.position.y;
                 falling = false;
-
+                walljumps = maxwalljumps;
             }
             else if (!falling)
             {
@@ -135,15 +143,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (!IsInvoking("DopeTime") && !IsInvoking("ReturnToNormal") && DopeCount > 0)
                 {
                     DopeCount--;
+                    isDope = true;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
                     walkSpeed += 10;
                     fpControler.m_WalkSpeed = walkSpeed;
                     fpControler.m_RunSpeed += 10;
-                    fpControler.m_JumpSpeed += 5;
+                    fpControler.m_JumpSpeed += 3;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
                     Invoke("DopeTime", 10f);
+
                 }
                 else
                     Debug.Log("nope");
@@ -168,21 +178,39 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 walkSpeed = 3;
             }
+            //dope
+            if (isDope)
+            {
+                t += 0.4f * Time.deltaTime;
+                t = Mathf.Clamp(t, 0, 1);
+                iaia.weight = Mathf.Lerp(iaia.weight, 1, t);
+            }
+            else
+            {
+                t -= 0.4f * Time.deltaTime;
+                t = Mathf.Clamp(t, 0, 1);
+                iaia.weight= Mathf.Lerp(0,iaia.weight, t);
+            }
+            //undope
         }
         public void DopeTime()
         {
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
+            isDope=false;
             walkSpeed -= 10;
             fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed -= 10;
-            fpControler.m_JumpSpeed -= 5;
+            fpControler.m_JumpSpeed -= 3;
             Debug.Log("walk speed"+fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             DopeDownTime();
         }
         public void DopeDownTime()
         {
+
+            iaia.profile.settings.Find(settings => settings.name == PostProcessNames.PP_DEPTH_OF_FIELD).active = true;
+            
             //  walkSpeed = Mathf.Clamp(-3, 1, 140);
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
