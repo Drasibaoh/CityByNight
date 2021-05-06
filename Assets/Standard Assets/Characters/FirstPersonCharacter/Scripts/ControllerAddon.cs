@@ -170,7 +170,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed -= 10;
-            fpControler.m_WalkSpeed -= 10;
+            fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed -= 10;
             fpControler.m_JumpSpeed -= 5;
             Debug.Log("walk speed"+fpControler.m_WalkSpeed);
@@ -183,6 +183,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed -= 3;
+            fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed -= 4;
             fpControler.m_JumpSpeed -= 2;
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
@@ -194,6 +195,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed += 3;
+            fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed += 4;
             fpControler.m_JumpSpeed += 2;
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
