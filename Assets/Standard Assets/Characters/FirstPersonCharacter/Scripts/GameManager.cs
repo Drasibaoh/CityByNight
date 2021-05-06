@@ -13,6 +13,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public static GameManager instance;
         public List<GameObject> obj;
         public int delivered = 0;
+        public TimerDos timerd;
+        public List<float> timeToAdd;
         private void Awake()
         {
             if (instance == null)
@@ -28,7 +30,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Start is called before the first frame update
         void Start()
         {
-
+            delivered--;
+          //  timerd.AddTime(timeToAdd[0]);
+            ChangeObjectif();
         }
 
         // Update is called once per frame
@@ -41,12 +45,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     Debug.Log("fondu");
                     //SceneManager.LoadScene(2);
-                    end = false;
+                    //end = false;
                 }
             }
         }
         public void ChangeObjectif()
         {
+            
             delivered++;
             if (delivered < obj.Count)
             {
@@ -57,6 +62,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     else
                         obj[i].SetActive(false);
                 }
+                timerd.AddTime(timeToAdd[delivered]);
             }
             else
             {

@@ -11,8 +11,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float timer = 0.0f;
         public float maxtimer = 10.0f;
         public float actualtimer = 0.0f;
+        float savedMin;
+        float savedS;
         public bool Timsup = false;
-        private float min;
+        [SerializeField]private float min;
         public Text line;
 
         // Start is called before the first frame update
@@ -23,8 +25,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
                 timer = maxtimer%60;
-                min = maxtimer / 60;
+                min = maxtimer / 60 - maxtimer%1;
             }
+            SaveTimer();
+            GameManager.instance.restart.AddListener(ResetTimer);
         }
 
         // Update is called once per frame
@@ -40,13 +44,44 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         min--;
                         timer = 60;
                     }
-                        Debug.LogError("e");
+                        Debug.Log("e");
                 }
             }
             line.text = (min-min%1)+": "+((timer-timer%0.1));
             
         }
-
+        public void ResetTimer()
+        {
+            min = savedMin;
+            timer = savedS;
+        }
+        public void AddTime(float newtime)
+        {
+            float newmin=newtime/60 - (newtime/60) % 1;
+            newtime -= newmin * 60;
+            if (newtime + timer > 120)
+            {
+                timer += newtime - 120;
+                min += newmin + 2;
+            }
+            else if (newtime + timer > 60)
+            {
+                timer += newtime - 60; // 50+30-60=20
+                min += newmin + 1;
+            }
+            else
+            {
+                timer += newtime;
+                min += newmin;
+            }
+            SaveTimer();
+            
+        }
+        public void SaveTimer()
+        {
+            savedMin = min;
+            savedS = timer;
+        }
         /*private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Livraison1"))

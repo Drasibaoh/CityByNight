@@ -24,6 +24,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public int DopeCount = 3;
         public bool isSliding;
         public bool headBlock;
+        public bool isOnWall;
         // Start is called before the first frame update
         void Start()
         {
@@ -134,10 +135,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (!IsInvoking("DopeTime") && !IsInvoking("ReturnToNormal") && DopeCount > 0)
                 {
                     DopeCount--;
+                    Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+                    Debug.Log("Run speed" + fpControler.m_RunSpeed);
                     walkSpeed += 10;
                     fpControler.m_WalkSpeed = walkSpeed;
                     fpControler.m_RunSpeed += 10;
                     fpControler.m_JumpSpeed += 5;
+                    Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+                    Debug.Log("Run speed" + fpControler.m_RunSpeed);
                     Invoke("DopeTime", 10f);
                 }
                 else
@@ -162,24 +167,37 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void DopeTime()
         {
+            Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+            Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed -= 10;
             fpControler.m_WalkSpeed -= 10;
             fpControler.m_RunSpeed -= 10;
             fpControler.m_JumpSpeed -= 5;
+            Debug.Log("walk speed"+fpControler.m_WalkSpeed);
+            Debug.Log("Run speed" + fpControler.m_RunSpeed);
             DopeDownTime();
         }
         public void DopeDownTime()
         {
+            //  walkSpeed = Mathf.Clamp(-3, 1, 140);
+            Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+            Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed -= 3;
             fpControler.m_RunSpeed -= 4;
             fpControler.m_JumpSpeed -= 2;
+            Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+            Debug.Log("Run speed" + fpControler.m_RunSpeed);
             Invoke("ReturnToNormal", 4f);
         }
         public void ReturnToNormal()
         {
+            Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+            Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed += 3;
             fpControler.m_RunSpeed += 4;
             fpControler.m_JumpSpeed += 2;
+            Debug.Log("walk speed" + fpControler.m_WalkSpeed);
+            Debug.Log("Run speed" + fpControler.m_RunSpeed);
         }
         public void Slide()
         {

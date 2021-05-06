@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
-        private Vector3 m_MoveDir = Vector3.zero;
+        public Vector3 m_MoveDir = Vector3.zero;
         public CharacterController m_CharacterController;
         private CollisionFlags m_CollisionFlags;
         private bool m_PreviouslyGrounded;
@@ -66,7 +66,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
+            if (!m_Jump && m_CharacterController.isGrounded)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -118,23 +118,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (m_Jump)
                 {
-                    if (m_ControllerAddon.isSliding)
-                    {
-                        m_ControllerAddon.GetUp();
-                        m_ControllerAddon.CancelInvoke("GetUp");
-                        m_MoveDir.y = m_JumpSpeed+2;
+                        if (m_ControllerAddon.isSliding)
+                        {
+                            m_ControllerAddon.GetUp();
+                            m_ControllerAddon.CancelInvoke("GetUp");
+                            m_MoveDir.y = m_JumpSpeed + 2;
+                        }
+                        else
+                            m_MoveDir.y = m_JumpSpeed;
+                        PlayJumpSound();
+                        m_Jump = false;
+                        m_Jumping = true;
                     }
-                    else 
-                        m_MoveDir.y = m_JumpSpeed;
-                    PlayJumpSound();
-                    m_Jump = false;
-                    m_Jumping = true;
 
-                }
+
+                
             }
             else
             {
-                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
+                m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
 

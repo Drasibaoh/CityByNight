@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class Delivery : MonoBehaviour
     {
         bool hasDelivered;
+        bool isInteractable;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,17 +17,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
-
-        }
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("Player"))
+            if (isInteractable)
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0) && !hasDelivered)
+                if (Input.GetKeyDown(KeyCode.E) && !hasDelivered)
                 {
                     GameManager.instance.ChangeObjectif();
                     hasDelivered = true;
                 }
+            }
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isInteractable = true;
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isInteractable = false;
             }
         }
     }
