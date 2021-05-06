@@ -164,6 +164,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 GetUp();
                 Debug.Log("yo");
             }
+            if (walkSpeed < 3)
+            {
+                walkSpeed = 3;
+            }
         }
         public void DopeTime()
         {
