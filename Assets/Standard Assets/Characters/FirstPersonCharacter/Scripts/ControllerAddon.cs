@@ -44,8 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             height = player.height;
             center = player.center;
             walkSpeed = fpControler.m_WalkSpeed;
-            for (int i = 0; i < DopePP.profile.settings.Count; i++)
-                Debug.Log(DopePP.profile.settings[i].name);
+            GameManager.instance.restart.AddListener(Death);
         }
 
         // Update is called once per frame
@@ -294,6 +293,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void Wait()
         {
 
+        }
+        public void Death()
+        {
+            GetUp();
+            walkSpeed = 5;
+            fpControler.m_WalkSpeed = walkSpeed;
+            fpControler.m_RunSpeed = 15;
+            fpControler.m_JumpSpeed = 7;
+            isDope = false;
+            DopePP.weight = 0;
+            RecoilPP.weight = 0;
+            CancelInvoke();
         }
     }
 }
