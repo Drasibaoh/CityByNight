@@ -27,12 +27,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool isSliding;
         public bool headBlock;
         public bool isOnWall;
-        public PostProcessVolume iaia;
-        public PostProcessVolume iaia2;
+        public PostProcessVolume DopePP;
+        public PostProcessVolume RecoilPP;
         bool isDope;
         public int walljumps;
         int maxwalljumps = 3;
         float t;
+        float t2;
+        bool recoilOver=true;
         // Start is called before the first frame update
         void Start()
         {
@@ -42,8 +44,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             height = player.height;
             center = player.center;
             walkSpeed = fpControler.m_WalkSpeed;
-            for (int i = 0; i < iaia.profile.settings.Count; i++)
-                Debug.Log(iaia.profile.settings[i].name);
+            for (int i = 0; i < DopePP.profile.settings.Count; i++)
+                Debug.Log(DopePP.profile.settings[i].name);
         }
 
         // Update is called once per frame
@@ -183,15 +185,37 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 t += 0.4f * Time.deltaTime;
                 t = Mathf.Clamp(t, 0, 1);
-                iaia.weight = Mathf.Lerp(iaia.weight, 1, t);
+                DopePP.weight = Mathf.Lerp(DopePP.weight, 1, t);
             }
             else
             {
                 t -= 0.4f * Time.deltaTime;
                 t = Mathf.Clamp(t, 0, 1);
-                iaia.weight= Mathf.Lerp(0,iaia.weight, t);
+                DopePP.weight = Mathf.Lerp(0, DopePP.weight, t);
             }
-            //undope
+            if (IsInvoking("ReturnToNormal"))
+            {
+                t2 += 0.4f*Time.deltaTime;
+                t2 = Mathf.Clamp(t2, 0, 1);
+                RecoilPP.weight = Mathf.Lerp(RecoilPP.weight, 1, t2);
+
+
+            }
+            if (IsInvoking("Wait"))
+                {
+                    recoilOver = false;
+                }
+            if (!recoilOver)
+            {
+                t2 -= 0.4f * Time.deltaTime;
+                t2 = Mathf.Clamp(t2, 0, 1);
+                RecoilPP.weight = Mathf.Lerp(0, RecoilPP.weight, t2);
+                if (t2 <= 0)
+                {
+                    recoilOver = true;
+                }
+            }
+
         }
         public void DopeTime()
         {
@@ -209,7 +233,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void DopeDownTime()
         {
 
-            iaia.profile.settings.Find(settings => settings.name == PostProcessNames.PP_DEPTH_OF_FIELD).active = true;
+          //  DopePP.profile.settings.Find(settings => settings.name == PostProcessNames.PP_DEPTH_OF_FIELD).active = true;
             
             //  walkSpeed = Mathf.Clamp(-3, 1, 140);
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
@@ -230,6 +254,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed += 4;
             fpControler.m_JumpSpeed += 2;
+            Invoke("Wait",4f);
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
         }
@@ -266,7 +291,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     headBlock = false;
             }
         }
+        public void Wait()
+        {
 
+        }
     }
 }
 
