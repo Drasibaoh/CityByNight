@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class AutoSlider : MonoBehaviour
     {
+        private ControllerAddon addon;
         // Start is called before the first frame update
         void Start()
         {
@@ -22,17 +23,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
-                ControllerAddon addOn= other.GetComponent<ControllerAddon>();
-                addOn.player.center = new Vector3(addOn.player.center.x, 0.6f, addOn.player.center.z);
-                addOn.player.height = 1.2f;
-                addOn.isSliding = true;
+                if (addon==null)
+                    addon= other.GetComponent<ControllerAddon>();
+                addon.player.center = new Vector3(addon.player.center.x, 0.6f, addon.player.center.z);
+                addon.player.height = 1.2f;
+                addon.isSliding = true;
             }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<ControllerAddon>().GetUp();
+                addon.GetUp();
                 
             }
         }

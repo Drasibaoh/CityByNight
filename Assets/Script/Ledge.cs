@@ -28,7 +28,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
-                player = other.GetComponent<ControllerAddon>();
+                if (player==null)
+                    player = other.GetComponent<ControllerAddon>();
                 Debug.Log("tagged");
                 //play anim
                 canReach = true;
