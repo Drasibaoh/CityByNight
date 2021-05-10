@@ -54,6 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 if (player==null)
                     player = other.GetComponent<ControllerAddon>();
+                isLost = false;
                 isIn = true;
 
             }

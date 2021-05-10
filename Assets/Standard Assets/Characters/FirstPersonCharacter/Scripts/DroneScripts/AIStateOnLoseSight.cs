@@ -16,12 +16,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public override void Begin()
         {
             this.fsm.agent.navAgent.destination = this.fsm.agent.targetLastPos;
+            Debug.Log("lost");
         }
 
         public override void Update()
         {
-            // check if we've arrived at our destination, then look around
+            if (fsm.agent.droneLight.noMove)
+            {
             timer += Time.deltaTime;
+            }
+            // check if we've arrived at our destination, then look around
+
             if (timer >= 2)
             {
                 timer = 0;
