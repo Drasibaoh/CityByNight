@@ -175,9 +175,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 GetUp();
                 Debug.Log("yo");
             }
-            if (walkSpeed < 3)
+            if (walkSpeed < 2)
             {
-                walkSpeed = 3;
+                walkSpeed = 2;
+                fpControler.m_WalkSpeed = walkSpeed;
             }
             //dope
             if (isDope)
