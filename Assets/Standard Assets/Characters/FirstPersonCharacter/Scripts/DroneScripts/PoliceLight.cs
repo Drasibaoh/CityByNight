@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         void Start()
         {
             LightEffect = GetComponent<PostProcessVolume>();
+            GameManager.instance.restart.AddListener(Return);
         }
 
         // Update is called once per frame
@@ -29,10 +30,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 noMove = true;
                 timeInLight += Time.deltaTime;
 
-                if (timeInLight >= 1.2f)
+                if (timeInLight >= 1.4f)
                 {
                     player.respawnPoint.Death();
-                    timeInLight = 0;
+                  
                 }
             }
             if (isLost)
@@ -45,13 +46,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     isLost = false;
                 }
             }
-            LightEffect.weight = timeInLight / 1.2f;
+            LightEffect.weight = timeInLight / 1.4f;
         }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                player = other.GetComponent<ControllerAddon>();
+                if (player==null)
+                    player = other.GetComponent<ControllerAddon>();
+                isLost = false;
                 isIn = true;
 
             }
@@ -66,7 +69,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Return()
         {
-
+            isIn = false;
+            noMove = false;
+            timeInLight = 0;
+            isLost = false;
         }
     }
 }

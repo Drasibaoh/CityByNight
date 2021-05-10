@@ -38,7 +38,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void OnTriggerEnter(Collider other)
         {
             jump = false;
-            actor = other.GetComponent<ControllerAddon>();
+            if (actor==null)
+                actor = other.GetComponent<ControllerAddon>();
             actor.isOnWall = true;
             actor.fpControler.m_GravityMultiplier=0;
             x = actor.rigibody.velocity.x;
