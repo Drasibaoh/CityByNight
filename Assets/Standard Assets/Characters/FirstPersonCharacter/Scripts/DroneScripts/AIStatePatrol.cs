@@ -7,7 +7,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class AIStatePatrol : State
     {
         private int m_pathIndex = -1;
-
         public AIStatePatrol() : base(StateNames.AI_PATROL)
         {
 
@@ -18,7 +17,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // feedback to show that we're attacking
             int closestPathIndex = -1;
             float closestDist = float.MaxValue;
-
+            fsm.agent.moving.Play("Forward Start");
+            fsm.agent.moving.PlayQueued("Forward Idle");
             // find the closest point on our path
             int len = this.fsm.agent.path.Length;
             for (int i = 0; i < len; i++)

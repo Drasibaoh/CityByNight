@@ -260,8 +260,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Slide()
         {
-            fpControler.m_WalkSpeed += 2;
-            fpControler.m_RunSpeed = 17;
+            walkSpeed += 2;
+            fpControler.m_WalkSpeed = walkSpeed;
+            fpControler.m_RunSpeed += 2;
             player.center = new Vector3(player.center.x, 0.6f, player.center.z);
             player.height = 1.2f;
             isSliding = true;
@@ -281,9 +282,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
 
-                    walkSpeed = 5;
+                    walkSpeed -= 2;
                     fpControler.m_WalkSpeed = walkSpeed;
-                    fpControler.m_RunSpeed = 15;
+                    fpControler.m_RunSpeed -= 2;
                     player.center = center;
                     slidetime = 0;
                     player.height = height;

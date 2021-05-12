@@ -15,6 +15,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public int delivered = 0;
         public TimerDos timerd;
         public List<float> timeToAdd;
+
+        public float finalTime;
+        public float finalMin;
+
         private void Awake()
         {
             if (instance == null)
@@ -43,9 +47,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 timer += Time.deltaTime;
                 if (timer >= 2)
                 {
+                    timerd.FinalSave();
                     Debug.Log("fondu");
-                    //SceneManager.LoadScene(2);
-                    //end = false;
+                    if (timerd.timer >= 0f)
+                    {
+                        SceneManager.LoadScene(2);
+                    }
+                    else
+                    {
+                      SceneManager.LoadScene(3);
+                    }
                 }
             }
         }

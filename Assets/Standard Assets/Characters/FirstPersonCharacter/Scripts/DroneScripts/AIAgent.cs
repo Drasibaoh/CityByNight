@@ -17,6 +17,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public AIAgent save;
         private FSM m_fsm = null;
+        public Animation moving;
 
         public NavMeshAgent navAgent { get; private set; }
 

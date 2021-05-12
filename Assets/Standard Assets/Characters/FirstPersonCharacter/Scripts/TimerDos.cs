@@ -82,6 +82,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             savedMin = min;
             savedS = timer;
         }
+        public void FinalSave()
+        {
+            GameManager.instance.finalMin = min;
+            GameManager.instance.finalTime = timer;
+        }
         /*private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Livraison1"))

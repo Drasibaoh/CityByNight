@@ -29,7 +29,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     actor.fpControler.m_MoveDir.y = actor.fpControler.m_JumpSpeed;
                     jump = true;
                 actor.falling = true;
-                actor.fallHeight = transform.position.y;
+                actor.fallHeight = actor.transform.position.y;
                 }
                 
             }
