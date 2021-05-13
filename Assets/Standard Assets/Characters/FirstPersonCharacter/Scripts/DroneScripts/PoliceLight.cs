@@ -12,6 +12,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool isLost = false;
         public bool noMove;
         public bool isIn;
+        public AIAgent agent = null;
         private PostProcessVolume LightEffect;
         private ControllerAddon player;
 
@@ -27,11 +28,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (isIn)
             {
-                noMove = true;
                 timeInLight += Time.deltaTime;
 
-                if (timeInLight >= 1.4f)
+                if (timeInLight >= 0.8f)
                 {
+                    agent.navAgent.enabled = true;
                     player.respawnPoint.Death();
                   
                 }
@@ -41,12 +42,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 timeInLight -= Time.deltaTime * speed;
                 if (timeInLight <= 0)
                 {
+
                     noMove = false;
                     timeInLight = 0;
                     isLost = false;
                 }
             }
             LightEffect.weight = timeInLight / 1.4f;
+            
+
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -54,6 +58,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 if (player==null)
                     player = other.GetComponent<ControllerAddon>();
+                agent.navAgent.enabled = false;
+                noMove = true;
                 isLost = false;
                 isIn = true;
 
@@ -63,6 +69,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
+                if (agent!=null)
+                    agent.navAgent.enabled = true;
+                Invoke("Wait", 0.5f);
                 isLost = true;
                 isIn = false;
             }
@@ -73,6 +82,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             noMove = false;
             timeInLight = 0;
             isLost = false;
+        }
+        public void Wait()
+        {
+            if (agent != null)
+                agent.m_fsm.ChangeState(StateNames.AI_PATROL);
         }
     }
 }

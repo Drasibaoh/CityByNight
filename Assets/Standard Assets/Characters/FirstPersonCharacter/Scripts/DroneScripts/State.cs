@@ -7,7 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class State
     {
         public FSM fsm = null;
-
+        public int m_pathIndex = -1;
         public string name { get; private set; }
 
         public State(string name)

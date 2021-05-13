@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class Delivery : MonoBehaviour
     {
         bool hasDelivered;
         bool isInteractable;
+        public Text feedback;
         // Start is called before the first frame update
         void Start()
         {
@@ -19,10 +20,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (isInteractable)
             {
+
                 if (Input.GetKeyDown(KeyCode.E) && !hasDelivered)
                 {
                     GameManager.instance.ChangeObjectif();
                     hasDelivered = true;
+                    feedback.gameObject.SetActive(false);
                 }
             }
         }
@@ -30,6 +33,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
+                feedback.gameObject.SetActive(true);
                 isInteractable = true;
             }
         }
@@ -37,6 +41,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
+                feedback.gameObject.SetActive(false);
                 isInteractable = false;
             }
         }

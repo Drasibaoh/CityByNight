@@ -16,7 +16,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [HideInInspector] public Vector3 targetLastPos;
 
         public AIAgent save;
-        private FSM m_fsm = null;
+        public FSM m_fsm = null;
         public Animation moving;
 
         public NavMeshAgent navAgent { get; private set; }

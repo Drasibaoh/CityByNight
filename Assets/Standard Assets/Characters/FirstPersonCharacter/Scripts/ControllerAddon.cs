@@ -6,6 +6,7 @@ using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class ControllerAddon : MonoBehaviour
@@ -35,6 +36,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         float t;
         float t2;
         bool recoilOver=true;
+        public GameObject BoostBar;
+        float dopetime;
+        float dopedowntime;
+        public List<Image> dose;
         // Start is called before the first frame update
         void Start()
         {
@@ -55,7 +60,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 GameManager.instance.restart.Invoke();
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            else
+            {
+   if (Input.GetKey(KeyCode.LeftShift))
             {
                 fpControler.m_WalkSpeed = walkSpeed;
             }
@@ -94,6 +101,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     fpControler.m_WalkSpeed = walkSpeed;
                 }
             }
+            }
+         
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 if (fpControler.m_WalkSpeed >= 8)
@@ -116,10 +125,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 else
                 {
                     GetUp();
-                    if (IsInvoking("GetUp"))
-                    {
-                        CancelInvoke("GetUp");
-                    }
+
                 }
             }
 
@@ -144,6 +150,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (!IsInvoking("DopeTime") && !IsInvoking("ReturnToNormal") && DopeCount > 0)
                 {
                     DopeCount--;
+                    for (int i = 0; i < dose.Count; i++)
+                    {
+                        if (i <= DopeCount-1)
+                            dose[i].color = Color.white;
+                        else 
+                            dose[i].color = Color.clear;
+                    }
                     isDope = true;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
@@ -153,8 +166,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     fpControler.m_JumpSpeed += 3;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
-                    Invoke("DopeTime", 10f);
-
+                    Invoke("DopeTime", dopetime);
+                    
                 }
                 else
                     Debug.Log("nope");
@@ -186,17 +199,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 t += 0.4f * Time.deltaTime;
                 t = Mathf.Clamp(t, 0, 1);
                 DopePP.weight = Mathf.Lerp(DopePP.weight, 1, t);
+                dopetime -= Time.deltaTime;
+                BoostBar.transform.localScale = new Vector3(dopetime/10, 1, 1);
             }
             else
             {
+                dopetime = 10;
                 t -= 0.4f * Time.deltaTime;
                 t = Mathf.Clamp(t, 0, 1);
+                
                 DopePP.weight = Mathf.Lerp(0, DopePP.weight, t);
             }
             if (IsInvoking("ReturnToNormal"))
             {
                 t2 += 0.4f*Time.deltaTime;
                 t2 = Mathf.Clamp(t2, 0, 1);
+                dopedowntime =Mathf.Clamp(dopedowntime+ Time.deltaTime,0,4);
+                BoostBar.transform.localScale = new Vector3(dopedowntime/4, 1, 1);
                 RecoilPP.weight = Mathf.Lerp(RecoilPP.weight, 1, t2);
 
 
@@ -250,6 +269,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
+            dopedowntime = 0;
             walkSpeed += 3;
             fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed += 4;
@@ -260,15 +280,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Slide()
         {
+
             walkSpeed += 2;
             fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed += 2;
             player.center = new Vector3(player.center.x, 0.6f, player.center.z);
             player.height = 1.2f;
             isSliding = true;
+            
+
         }
         public void GetUp()
         {
+            if (IsInvoking("GetUp"))
+            {
+                CancelInvoke("GetUp");
+            }
             int layerMask = 1;
             RaycastHit Hit;
             if (Physics.Raycast(transform.position, new Vector3(0, 1, 0), out Hit, 3, layerMask))

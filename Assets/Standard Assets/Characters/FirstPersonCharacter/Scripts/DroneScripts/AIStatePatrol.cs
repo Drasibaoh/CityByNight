@@ -6,7 +6,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class AIStatePatrol : State
     {
-        private int m_pathIndex = -1;
+
         public AIStatePatrol() : base(StateNames.AI_PATROL)
         {
 
@@ -14,6 +14,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public override void Begin()
         {
+            if (fsm.prev != null)
+            {
+                m_pathIndex = fsm.prev.m_pathIndex;
+            }
+            else
+            {
             // feedback to show that we're attacking
             int closestPathIndex = -1;
             float closestDist = float.MaxValue;
@@ -32,8 +38,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
             this.m_pathIndex = closestPathIndex;
+            }
+
 
             // start moving to the closest point
+
             this.fsm.agent.navAgent.destination = this.fsm.agent.path[this.m_pathIndex].position;
         }
 
@@ -56,7 +65,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             if (this.fsm.agent.droneLight.noMove)
             {
-                this.fsm.ChangeState(StateNames.AI_ON_LOSE_SIGHT);
+             //   this.fsm.ChangeState(StateNames.AI_ON_LOSE_SIGHT);
             }
 
             // check if we can see the player

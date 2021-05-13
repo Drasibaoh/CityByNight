@@ -9,6 +9,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public GameObject pauseUI;
         public GameObject gameUI;
         public GameObject controlsUI;
+        public Playlist list;
         bool isStopped;
         // Start is called before the first frame update
         void Start()
@@ -21,19 +22,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (Input.GetKeyDown(KeyCode.Tab) && !isStopped)
             {
-                pauseUI.SetActive(true);
-                gameUI.SetActive(false); 
-                player.enabled = false;
-                isStopped = true;
-                player.m_MouseLook.SetCursorLock(false);
-                Time.timeScale = 0;
-                Cursor.visible=true;
- 
+                Stop();
             }
             else if (Input.GetKeyDown(KeyCode.Tab) && isStopped)
             {
                 Game();
             }
+        }
+        public void Stop()
+        {
+            pauseUI.SetActive(true);
+            gameUI.SetActive(false);
+            player.enabled = false;
+            isStopped = true;
+            player.m_MouseLook.SetCursorLock(false);
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            list.Pause();
         }
         public void Game()
         {
@@ -46,6 +51,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             player.m_MouseLook.Init(player.transform, player.m_Camera.transform);
             player.m_MouseLook.SetCursorLock(true);
             player.m_MouseLook.lockCursor = true;
+            list.Resume();
         }
         public void Controls()
         {
