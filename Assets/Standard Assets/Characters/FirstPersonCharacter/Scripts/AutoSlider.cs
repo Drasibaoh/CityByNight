@@ -8,6 +8,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class AutoSlider : MonoBehaviour
     {
         private ControllerAddon addon;
+        [SerializeField] float impulse=0.2f;
         public bool isIn;
         // Start is called before the first frame update
         void Start()
@@ -20,7 +21,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (isIn)
             {
-                addon.player.Move(addon.transform.forward*0.1f);
+                addon.player.Move(transform.forward* impulse);
+                Debug.Log(transform.forward);
             }
         }
         private void OnTriggerEnter(Collider other)
@@ -30,25 +32,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (addon==null)
                     addon= other.GetComponent<ControllerAddon>();
                 isIn = true;
-                addon.walkSpeed += 2;
+               /* addon.walkSpeed += 2;
                 addon.fpControler.m_WalkSpeed = addon.walkSpeed;
-                addon.fpControler.m_RunSpeed += 2;
+                addon.fpControler.m_RunSpeed += 2;*/
                 addon.player.center = new Vector3(addon.player.center.x, 0.6f, addon.player.center.z);
                 addon.player.height = 1.2f;
-                addon.isSliding = true;
+                addon.isAutoSliding = true;
             }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                addon.walkSpeed -= 2;
+              /*  addon.walkSpeed -= 2;
                 addon.fpControler.m_WalkSpeed = addon.walkSpeed;
                 addon.fpControler.m_RunSpeed -= 2;
-                addon.player.center = addon.center;
+                */addon.player.center = addon.center;
                 addon.slidetime = 0;
                 addon.player.height = addon.height;
-                addon.isSliding = false;
+                addon.isAutoSliding = false;
                 addon.headBlock = false;
                 isIn = false;
                 addon.player.enabled = true;

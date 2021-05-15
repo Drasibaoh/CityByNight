@@ -20,11 +20,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab) && !isStopped)
+            if (Input.GetKeyDown(KeyCode.Escape) && !isStopped)
             {
                 Stop();
             }
-            else if (Input.GetKeyDown(KeyCode.Tab) && isStopped)
+            else if (Input.GetKeyDown(KeyCode.Escape) && isStopped)
             {
                 Game();
             }

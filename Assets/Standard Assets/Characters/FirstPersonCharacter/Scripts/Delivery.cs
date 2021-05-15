@@ -9,6 +9,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool hasDelivered;
         bool isInteractable;
         public Text feedback;
+        public Text boostedFeedback;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -26,6 +28,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     GameManager.instance.ChangeObjectif();
                     hasDelivered = true;
                     feedback.gameObject.SetActive(false);
+                    boostedFeedback.gameObject.SetActive(false);
                 }
             }
         }
@@ -34,6 +37,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (other.CompareTag("Player"))
             {
                 feedback.gameObject.SetActive(true);
+                boostedFeedback.gameObject.SetActive(true);
                 isInteractable = true;
             }
         }
@@ -42,6 +46,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (other.CompareTag("Player"))
             {
                 feedback.gameObject.SetActive(false);
+                boostedFeedback.gameObject.SetActive(false);
+
                 isInteractable = false;
             }
         }

@@ -16,7 +16,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool Timsup = false;
         [SerializeField]private float min;
         public Text line;
-
+        public Text BoostedLine;
+        [SerializeField] GameObject NormalUi;
         // Start is called before the first frame update
         void Start()
         {
@@ -47,8 +48,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         Debug.Log("e");
                 }
             }
+            if (NormalUi.activeSelf)
             line.text = (min-min%1)+": "+((timer-timer%0.1));
-            
+            else
+                BoostedLine.text= (min - min % 1) + ": " + ((timer - timer % 0.1));
+
         }
         public void ResetTimer()
         {

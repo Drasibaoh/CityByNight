@@ -30,6 +30,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     jump = true;
                 actor.falling = true;
                 actor.fallHeight = actor.transform.position.y;
+                    actor.fpControler.PlayJumpSound();
                 }
                 
             }

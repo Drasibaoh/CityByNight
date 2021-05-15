@@ -26,11 +26,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void OnReset()
         {
-            Debug.Log("eee");
+            //Debug.Log("eee");
             this.transform.position = goTo.transform.position;
             this.transform.rotation =new Quaternion(0,0,0,0);
             if (agent != null)
             {
+                
                 agent.Return();
             }
             

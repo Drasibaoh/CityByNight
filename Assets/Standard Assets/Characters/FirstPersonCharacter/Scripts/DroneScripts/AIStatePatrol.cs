@@ -16,7 +16,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (fsm.prev != null)
             {
-                m_pathIndex = fsm.prev.m_pathIndex;
+                m_pathIndex = 0;
             }
             else
             {

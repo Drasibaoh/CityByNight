@@ -32,7 +32,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (timeInLight >= 0.8f)
                 {
-                    agent.navAgent.enabled = true;
+                    if (agent != null)
+                        agent.navAgent.enabled = true;
+                    Debug.Log("drone death");
                     player.respawnPoint.Death();
                   
                 }
@@ -58,7 +60,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 if (player==null)
                     player = other.GetComponent<ControllerAddon>();
-                agent.navAgent.enabled = false;
+                if (agent != null)
+                    agent.navAgent.enabled = false;
                 noMove = true;
                 isLost = false;
                 isIn = true;
@@ -82,6 +85,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             noMove = false;
             timeInLight = 0;
             isLost = false;
+            if (agent != null)
+                agent.navAgent.enabled = true;
+            Wait();
         }
         public void Wait()
         {
