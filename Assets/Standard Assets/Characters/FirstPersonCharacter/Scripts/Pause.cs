@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Video;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class Pause : MonoBehaviour
@@ -11,10 +13,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public GameObject controlsUI;
         public Playlist list;
         bool isStopped;
+        public VideoPlayer crosshair;
+        public VideoPlayer HUD;
+        public List<Image> boutons;
         // Start is called before the first frame update
         void Start()
         {
-            
+           
         }
 
         // Update is called once per frame
@@ -31,9 +36,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Stop()
         {
+            crosshair.Stop();
             pauseUI.SetActive(true);
             gameUI.SetActive(false);
             player.enabled = false;
+            if (player.m_ControllerAddon.isDope)
+            {
+              for (int i=0; i < boutons.Count; i++)
+                {
+                    boutons[i].color = Color.green;
+                }
+            }
             isStopped = true;
             player.m_MouseLook.SetCursorLock(false);
             Time.timeScale = 0;
@@ -42,9 +55,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Game()
         {
+            crosshair.Play();
             pauseUI.SetActive(false);
             gameUI.SetActive(true);
             controlsUI.SetActive(false);
+            if (player.m_ControllerAddon.isDope)
+            {
+                for (int i = 0; i < boutons.Count; i++)
+                {
+                    boutons[i].color = Color.white;
+                }
+            }
             Time.timeScale = 1;
             player.enabled = true;
             isStopped = false;

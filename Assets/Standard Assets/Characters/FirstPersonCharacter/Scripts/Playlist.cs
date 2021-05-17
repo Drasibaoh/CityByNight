@@ -14,6 +14,10 @@ public class Playlist : MonoBehaviour
     void Start()
     {
         phones = GetComponent<AudioSource>();
+        if (playingTrack < 0)
+        {
+            playingTrack = 0;
+        }
         if (playlist.Count == 0)
         {
             isEmpty = true;
@@ -27,6 +31,8 @@ public class Playlist : MonoBehaviour
     {
         if (!isEmpty)
         {
+            if (Time.timeScale > 0.2f)
+            {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Back();
@@ -46,6 +52,8 @@ public class Playlist : MonoBehaviour
             {
                 Next();
             }
+            }
+
         }
 
     }

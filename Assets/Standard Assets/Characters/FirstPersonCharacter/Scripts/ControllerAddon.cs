@@ -33,7 +33,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public PostProcessVolume RecoilPP;
         [SerializeField] GameObject NormalUi;
         [SerializeField] GameObject BoostedUi;
-        bool isDope;
+        public bool isDope;
         public int walljumps;
         int maxwalljumps = 3;
         float t;
@@ -45,6 +45,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         float dopedowntime;
         public List<Image> dose;
         public List<Image> Bdose;
+        public RawImage CrossHair;
+        public RawImage HUD;
         // Start is called before the first frame update
         void Start()
         {
@@ -173,7 +175,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             dose[i].color = Color.clear;
                         }
                     }
-
+                    HUD.color = Color.green;
+                    CrossHair.color = Color.green;
                     NormalUi.SetActive(false);
                     BoostedUi.SetActive(true);
                     isDope = true;
@@ -280,6 +283,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //  DopePP.profile.settings.Find(settings => settings.name == PostProcessNames.PP_DEPTH_OF_FIELD).active = true;
 
             //  walkSpeed = Mathf.Clamp(-3, 1, 140);
+            HUD.color = Color.white;
+            CrossHair.color = Color.white;
             BoostedUi.SetActive(false);
             NormalUi.SetActive(true);
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
@@ -352,6 +357,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Death()
         {
+            HUD.color = Color.white;
+            CrossHair.color = Color.white;
+            BoostedUi.SetActive(false);
+            NormalUi.SetActive(true);
+            BoostBar.transform.localScale = Vector3.one;
+            BBoostBar.transform.localScale = Vector3.one;
             GetUp();
             walkSpeed = 5;
             fpControler.m_WalkSpeed = walkSpeed;
