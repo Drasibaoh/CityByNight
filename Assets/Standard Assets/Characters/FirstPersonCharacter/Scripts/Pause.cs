@@ -16,6 +16,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public VideoPlayer crosshair;
         public VideoPlayer HUD;
         public List<Image> boutons;
+        
         // Start is called before the first frame update
         void Start()
         {

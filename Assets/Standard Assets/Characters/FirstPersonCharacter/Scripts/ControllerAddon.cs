@@ -47,6 +47,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public List<Image> Bdose;
         public RawImage CrossHair;
         public RawImage HUD;
+        public RawImage Spectrum;
+        Color spectrCol;
         // Start is called before the first frame update
         void Start()
         {
@@ -56,6 +58,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             height = player.height;
             center = player.center;
             walkSpeed = fpControler.m_WalkSpeed;
+            spectrCol = Spectrum.color;
             GameManager.instance.restart.AddListener(Death);
         }
 
@@ -175,6 +178,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             dose[i].color = Color.clear;
                         }
                     }
+                    Spectrum.color = Color.green;
                     HUD.color = Color.green;
                     CrossHair.color = Color.green;
                     NormalUi.SetActive(false);
@@ -285,6 +289,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //  walkSpeed = Mathf.Clamp(-3, 1, 140);
             HUD.color = Color.white;
             CrossHair.color = Color.white;
+            Spectrum.color = spectrCol;
             BoostedUi.SetActive(false);
             NormalUi.SetActive(true);
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);

@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+using UnityEngine.Video;
 public class Playlist : MonoBehaviour
 {
     public int playingTrack=0;
     public List<AudioClip> playlist;
     AudioSource phones;
-    bool isNotPaused=true;
+    bool isPaused=true;
     bool isEmpty = false;
+    public VideoPlayer spectrum;
+    public List<VideoClip> spectrums;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,13 @@ public class Playlist : MonoBehaviour
             isEmpty = true;
         }
         else
-            phones.clip = playlist[playingTrack];
+        {
+            phones.clip = playlist[0];
+            spectrum.clip = spectrums[0];
+            phones.Play();
+        }
+
+
     }
 
     // Update is called once per frame
@@ -33,39 +41,41 @@ public class Playlist : MonoBehaviour
         {
             if (Time.timeScale > 0.2f)
             {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Back();
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    Back();
+                }
+                else if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    Next();
+                }
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    if (!isPaused)
+                        Pause();
+                    else
+                        Resume();
+                }
+                if (!phones.isPlaying && !isPaused)
+                {
+                    Next();
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                Next();
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                if (isNotPaused)
-                    Pause();
-                else
-                    Resume();
-            }
-            if (!phones.isPlaying && isNotPaused)
-            {
-                Next();
-            }
-            }
-
+            
         }
 
     }
     public void Pause()
     {
         phones.Pause();
-        isNotPaused = false;
+        isPaused = true;
+        spectrum.Pause();
     }
     public void Resume()
     {
         phones.Play();
-        isNotPaused = true;
+        isPaused = false;
+        spectrum.Play();
     }
     public void Next()
     {
@@ -73,7 +83,10 @@ public class Playlist : MonoBehaviour
         if (playingTrack > playlist.Count - 1)
             playingTrack = 0;
         phones.clip = playlist[playingTrack];
+        spectrum.clip = spectrums[playingTrack];
         phones.Play();
+        spectrum.Play();
+
     }
     public void Back()
     {
@@ -81,7 +94,9 @@ public class Playlist : MonoBehaviour
         if (playingTrack < 0)
             playingTrack = playlist.Count - 1;
         phones.clip = playlist[playingTrack];
+        spectrum.clip = spectrums[playingTrack];
         phones.Play();
+        spectrum.Play();
     }
     
 }

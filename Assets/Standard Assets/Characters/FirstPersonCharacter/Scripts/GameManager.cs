@@ -24,6 +24,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (instance == null)
             {
                 instance = this;
+                DontDestroyOnLoad(this.gameObject);
             }
             else
             {
@@ -52,7 +53,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     if (SceneManager.sceneCount <= 2)
                         if (timerd.timer >= 0f)
                         {
-                            SceneManager.LoadScene(2);
+                            SceneManager.LoadScene(1);
                         }
                         else
                         {
