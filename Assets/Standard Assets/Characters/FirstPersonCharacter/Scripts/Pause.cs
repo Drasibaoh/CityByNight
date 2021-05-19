@@ -15,6 +15,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool isStopped;
         public VideoPlayer crosshair;
         public VideoPlayer HUD;
+        public VideoPlayer transitions;
+        public RawImage menu;
         public List<Image> boutons;
         
         // Start is called before the first frame update
@@ -26,6 +28,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
+            if (Timestoper.instance.end)
+            {
             if (Input.GetKeyDown(KeyCode.Escape) && !isStopped)
             {
                 Stop();
@@ -34,6 +38,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 Game();
             }
+            }
+
         }
         public void Stop()
         {
@@ -41,11 +47,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             pauseUI.SetActive(true);
             gameUI.SetActive(false);
             player.enabled = false;
+            menu.gameObject.SetActive(true);
+            transitions.Play();
+            menu.GetComponent<AudioSource>().Play();
             if (player.m_ControllerAddon.isDope)
             {
               for (int i=0; i < boutons.Count; i++)
                 {
-                    boutons[i].color = Color.green;
+                    boutons[i].color = new Color(0.7f,1,0.7f);
                 }
             }
             isStopped = true;
@@ -60,6 +69,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             pauseUI.SetActive(false);
             gameUI.SetActive(true);
             controlsUI.SetActive(false);
+            menu.gameObject.SetActive(false);
             if (player.m_ControllerAddon.isDope)
             {
                 for (int i = 0; i < boutons.Count; i++)
