@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using UnityEngine.Video;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class ControllerAddon : MonoBehaviour
@@ -47,8 +48,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public List<Image> Bdose;
         public RawImage CrossHair;
         public RawImage HUD;
+        public VideoPlayer CH;
+        public VideoPlayer HD;
         public RawImage Spectrum;
         Color spectrCol;
+        [SerializeField] private AudioClip exhaustion;
+        [SerializeField] private AudioClip gulp;
+        [SerializeField] private AudioSource added;
+        bool started=false;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -60,11 +68,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
             walkSpeed = fpControler.m_WalkSpeed;
             spectrCol = Spectrum.color;
             GameManager.instance.restart.AddListener(Death);
+            HD.Play();
+            CH.Play();
+            CH.Pause();
+            HD.Pause();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (!started)
+            {
+                if (Timestoper.instance.end)
+                {
+                    HD.Play();
+                    CH.Play();
+                    started = true;
+                }
+            }
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 GameManager.instance.restart.Invoke();
@@ -169,7 +190,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     {
                         if (i <= DopeCount - 1)
                         {
-                            Bdose[i].color = Color.white;
                             dose[i].color = Color.white;
                         }
                         else
@@ -178,9 +198,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             dose[i].color = Color.clear;
                         }
                     }
-                    Spectrum.color = Color.green;
-                    HUD.color = Color.green;
-                    CrossHair.color = Color.green;
+                    Spectrum.color = new Color(0.7f,1f,0.7f);
+                    HUD.color = new Color(0.7f, 1f, 0.7f);
+                    CrossHair.color = new Color(0.7f, 1, 0.7f);
+                    added.clip = gulp;
+                    added.Play();
                     NormalUi.SetActive(false);
                     BoostedUi.SetActive(true);
                     isDope = true;
@@ -292,6 +314,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Spectrum.color = spectrCol;
             BoostedUi.SetActive(false);
             NormalUi.SetActive(true);
+            added.clip = exhaustion;
+            added.Play();
+            added.loop = true;
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed -= 3;
@@ -306,6 +331,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
+            added.loop = false;
+            added.Pause();
             dopedowntime = 0;
             walkSpeed += 3;
             fpControler.m_WalkSpeed = walkSpeed;

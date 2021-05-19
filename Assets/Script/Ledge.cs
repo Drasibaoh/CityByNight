@@ -21,6 +21,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (canReach)
             {
+                
+                player.fpControler.m_GravityMultiplier = 0.5f;
                 if (Input.GetKeyDown(KeyCode.Space))
                     impulsing = true;
                 if (impulsing == true)
@@ -45,6 +47,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             impulsing = false;
             canReach = false;
+            player.fpControler.m_GravityMultiplier = 2;
         }
     }
 }
