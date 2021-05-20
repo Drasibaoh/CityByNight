@@ -138,4 +138,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standPoint: {fileID: 7013843462221789623}
-  imp: 3
+  imp: 0.5
