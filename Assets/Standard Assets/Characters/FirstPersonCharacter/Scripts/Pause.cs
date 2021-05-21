@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class Pause : MonoBehaviour
@@ -43,6 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Stop()
         {
+            player.m_ControllerAddon.StopSound();
             crosshair.Stop();
             pauseUI.SetActive(true);
             gameUI.SetActive(false);
@@ -65,6 +67,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Game()
         {
+            player.m_ControllerAddon.StartSound();
             crosshair.Play();
             pauseUI.SetActive(false);
             gameUI.SetActive(true);

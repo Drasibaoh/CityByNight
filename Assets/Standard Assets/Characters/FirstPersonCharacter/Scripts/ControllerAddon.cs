@@ -405,6 +405,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             RecoilPP.weight = 0;
             CancelInvoke();
         }
+        public void StopSound()
+        {
+            added.Pause();
+        }
+        public void StartSound()
+        {
+            added.Play();
+        }
     }
 }
 
