@@ -56,7 +56,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip gulp;
         [SerializeField] private AudioSource added;
         bool started=false;
-
+        public bool isRecoiling = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -309,6 +309,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //  DopePP.profile.settings.Find(settings => settings.name == PostProcessNames.PP_DEPTH_OF_FIELD).active = true;
 
             //  walkSpeed = Mathf.Clamp(-3, 1, 140);
+            isRecoiling = true;
             HUD.color = Color.white;
             CrossHair.color = Color.white;
             Spectrum.color = spectrCol;
@@ -329,6 +330,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void ReturnToNormal()
         {
+            isRecoiling = false;
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             added.loop = false;

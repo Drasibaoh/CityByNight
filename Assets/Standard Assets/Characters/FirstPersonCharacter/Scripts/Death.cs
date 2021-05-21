@@ -20,11 +20,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("yo");
             if (other.CompareTag("Player"))
             {
-                if (player==null)
+                if (player == null)
                     player = other.GetComponent<ControllerAddon>();
-                player.Death();
+                Debug.Log("ye");
+                player.respawnPoint.Death();
             }
         }
     }

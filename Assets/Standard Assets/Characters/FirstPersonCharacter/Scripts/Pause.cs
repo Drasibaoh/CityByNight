@@ -67,7 +67,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Game()
         {
-            player.m_ControllerAddon.StartSound();
+            
+            if (player.m_ControllerAddon.isRecoiling)
+                player.m_ControllerAddon.StartSound();
             crosshair.Play();
             pauseUI.SetActive(false);
             gameUI.SetActive(true);
