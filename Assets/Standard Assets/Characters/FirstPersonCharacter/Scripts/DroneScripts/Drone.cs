@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             goTo.transform.position = this.transform.position;
             goTo.transform.rotation = this.transform.rotation;
+            goTo.transform.localScale = this.transform.localScale;
             pLight = GetComponentInChildren<PoliceLight>();
             agent = GetComponent<AIAgent>();
             GameManager.instance.restart.AddListener(OnReset);
