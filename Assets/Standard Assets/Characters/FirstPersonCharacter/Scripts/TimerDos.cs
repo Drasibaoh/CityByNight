@@ -29,7 +29,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 min = maxtimer / 60 - maxtimer%1;
             }
             SaveTimer();
-            GameManager.instance.restart.AddListener(ResetTimer);
+           // GameManager.instance.restart.AddListener(ResetTimer);
         }
 
         // Update is called once per frame

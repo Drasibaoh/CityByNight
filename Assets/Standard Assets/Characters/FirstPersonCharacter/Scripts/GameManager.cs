@@ -50,10 +50,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     timerd.FinalSave();
                     Debug.Log("fondu");
-                    if (SceneManager.sceneCount <= 2)
                         if (timerd.timer >= 0f)
                         {
-                            SceneManager.LoadScene(1);
+                            SceneManager.LoadScene(2);
                         }
                         else
                         {

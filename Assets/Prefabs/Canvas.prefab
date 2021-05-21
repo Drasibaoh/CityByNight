@@ -2799,8 +2799,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d0a99359d7d98df45acd8160255ad3db, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: d44762068fe6b7e4190528891a6a10f1, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4263,6 +4263,8 @@ MonoBehaviour:
   list: {fileID: 0}
   crosshair: {fileID: 1868461355}
   HUD: {fileID: 2071449765}
+  transitions: {fileID: 0}
+  menu: {fileID: 0}
   boutons:
   - {fileID: 1865470549}
   - {fileID: 921100484}
