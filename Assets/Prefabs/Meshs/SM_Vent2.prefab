@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3566221148982601411}
   - component: {fileID: 491482422418401638}
   - component: {fileID: 2393364002371018156}
+  - component: {fileID: 3681720555411673827}
   m_Layer: 0
   m_Name: SM_Vent2
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3681720555411673827
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194561616922524793}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -951608786083511892, guid: 08e9df3db2d157843af3949dc64ca0d4, type: 3}
