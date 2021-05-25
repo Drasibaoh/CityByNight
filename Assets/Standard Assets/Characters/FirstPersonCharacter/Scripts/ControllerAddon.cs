@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     {
         public Respawn respawnPoint;
         public Rigidbody rigibody;
+        public Animator charcater;
         public float walkSpeed;
         public float accel = 0.1f;
         public FirstPersonController fpControler;
@@ -57,6 +58,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioSource added;
         bool started=false;
         public bool isRecoiling = false;
+        public GameObject mesh;
         // Start is called before the first frame update
         void Start()
         {
@@ -94,22 +96,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             else
             {
-   if (Input.GetKey(KeyCode.LeftShift))
-            {
-                fpControler.m_WalkSpeed = walkSpeed;
-            }
-            else
-            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    fpControler.m_WalkSpeed = walkSpeed;
+                }
+                else
+                {
                     if (Input.GetKey(KeyCode.Z))
                     {
                         if (isSliding)
                         {
-
+                            charcater.SetFloat("z", 1);
                         }
                         else
                         {
                             if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed)
-                                fpControler.m_WalkSpeed += 1 * accel*Time.deltaTime;
+                                fpControler.m_WalkSpeed += 1 * accel * Time.deltaTime;
                             else
                             {
                                 fpControler.m_WalkSpeed -= 1 * accel * Time.deltaTime;
@@ -118,7 +120,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                     }
 
-                    else if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D))
+                    else if (Input.GetKey(KeyCode.Q))
                     {
                         /*if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed - 7)
                             fpControler.m_WalkSpeed += 1 * accel;
@@ -127,12 +129,36 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             fpControler.m_WalkSpeed -= 1 * accel;
                         }*/
                         fpControler.m_WalkSpeed = 10;
+                        charcater.SetFloat("X", 1);
                     }
-                if (Input.GetKeyUp(KeyCode.Z) )
-                {
-                    fpControler.m_WalkSpeed = walkSpeed;
+                    else if (Input.GetKeyDown(KeyCode.D))
+                    {
+                        fpControler.m_WalkSpeed = 10;
+                        charcater.SetFloat("X", -1);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.S))
+                    {
+                        charcater.SetFloat("z", -1);
+                    }
+
+                    if (Input.GetKeyUp(KeyCode.Z))
+                    {
+                        fpControler.m_WalkSpeed = walkSpeed;
+                        charcater.SetFloat("z", 0);
+                    }
+                    else if (Input.GetKeyUp(KeyCode.Q))
+                    {
+                        charcater.SetFloat("X", 0);
+                    }
+                    else if (Input.GetKeyUp(KeyCode.D))
+                    {
+                        charcater.SetFloat("X", 0);
+                    }
+                    else if (Input.GetKeyUp(KeyCode.S))
+                    {
+                        charcater.SetFloat("z", 0);
+                    }
                 }
-            }
             }
          
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -171,7 +197,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (fallHeight - deathFall > transform.position.y)
                 {
                     Debug.Log("fall death");
-                    respawnPoint.Death();
+                 //   respawnPoint.Death();
                 }
                 fallHeight = transform.position.y;
                 falling = false;
@@ -365,8 +391,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
            // fpControler.m_RunSpeed += 2;
             player.center = new Vector3(player.center.x, 0.6f, player.center.z);
             player.height = 1.2f;
+            mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y+1.3f, mesh.transform.position.z);
             isSliding = true;
-            
+            charcater.SetTrigger("Slide");
 
         }
         public void GetUp()
@@ -389,14 +416,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
 
                 //  walkSpeed -= 2;
-                  fpControler.m_WalkSpeed -=3;
+                fpControler.m_WalkSpeed -= 3;
                 //  fpControler.m_RunSpeed -= 2;
                 //    walkSpeed += 2;
-                    player.center = center;
-                    slidetime = 0;
-                    player.height = height;
-                    isSliding = false;
-                    headBlock = false;
+                player.center = center;
+                slidetime = 0;
+                player.height = height;
+                isSliding = false;
+                headBlock = false;
+                mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y - 1.3f, mesh.transform.position.z);
+                
             }
         }
         public void Wait()
@@ -407,15 +436,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             HUD.color = Color.white;
             CrossHair.color = Color.white;
+            Spectrum.color = new Color(0.1019608f, 0.7490196f, 0.7490196f);
             BoostedUi.SetActive(false);
             NormalUi.SetActive(true);
             BoostBar.transform.localScale = Vector3.one;
             BBoostBar.transform.localScale = Vector3.one;
+            if (!isSliding)
+            {
+                mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y + 1.3f, mesh.transform.position.z);
+            }
             GetUp();
             walkSpeed = 5;
             fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed = 15;
             fpControler.m_JumpSpeed = 7;
+            
             isDope = false;
             DopePP.weight = 0;
             RecoilPP.weight = 0;

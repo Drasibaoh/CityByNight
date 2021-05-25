@@ -35,7 +35,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     hasDelivered = true;
                     GameManager.instance.ChangeObjectif();
-                    
+                    isInteractable = false;
                     feedback.gameObject.SetActive(false);
                     boostedFeedback.gameObject.SetActive(false);
                 }

@@ -126,7 +126,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         else
                             m_MoveDir.y = m_JumpSpeed;
                         PlayJumpSound();
-                        m_Jump = false;
+                        m_ControllerAddon.charcater.SetTrigger("Jump");
+
+                    m_Jump = false;
                         m_Jumping = true;
                     }
 

@@ -16,8 +16,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool isStopped;
         public VideoPlayer crosshair;
         public VideoPlayer HUD;
-        public VideoPlayer transitions;
-        public RawImage menu;
+        public List<VideoPlayer> transitions;
+        public List<RawImage> menu;
         public List<Image> boutons;
         
         // Start is called before the first frame update
@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
+
             if (Timestoper.instance.end)
             {
             if (Input.GetKeyDown(KeyCode.Escape) && !isStopped)
@@ -49,15 +50,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             pauseUI.SetActive(true);
             gameUI.SetActive(false);
             player.enabled = false;
-            menu.gameObject.SetActive(true);
-            transitions.Play();
-            menu.GetComponent<AudioSource>().Play();
+            menu[0].enabled = true;
+            transitions[0].Play();
+            menu[0].GetComponent<AudioSource>().Play();
             if (player.m_ControllerAddon.isDope)
             {
-              for (int i=0; i < boutons.Count; i++)
+                for (int i=0; i < boutons.Count; i++)
                 {
                     boutons[i].color = new Color(0.7f,1,0.7f);
                 }
+                for (int j = 0; j < menu.Count; j++)
+                {
+                    menu[j].color = new Color(0.7f, 1, 0.7f);
+                    menu[j].gameObject.SetActive(true);
+                }
+                
+
             }
             isStopped = true;
             player.m_MouseLook.SetCursorLock(false);
@@ -65,6 +73,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Cursor.visible = true;
             list.Pause();
         }
+        
         public void Game()
         {
             
@@ -74,7 +83,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             pauseUI.SetActive(false);
             gameUI.SetActive(true);
             controlsUI.SetActive(false);
-            menu.gameObject.SetActive(false);
+            menu[0].enabled=false;
             if (player.m_ControllerAddon.isDope)
             {
                 for (int i = 0; i < boutons.Count; i++)
@@ -97,12 +106,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 pauseUI.SetActive(true);
                 gameUI.SetActive(false);
                 controlsUI.SetActive(false);
+                transitions[1].frame = 1;
+                Debug.Log(menu[1].color);
+                transitions[1].Play();
+                //menu[0].gameObject.SetActive(false);
+
             }
             else
             {
                 pauseUI.SetActive(false);
                 gameUI.SetActive(false);
-                controlsUI.SetActive(true);
+                controlsUI.SetActive(true);                
+                transitions[2].frame = 1;
+                Debug.Log(menu[2].color);
+                transitions[2].Play();
+                //menu[0].gameObject.SetActive(false);
+
             }
 
         }

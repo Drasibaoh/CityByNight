@@ -21,12 +21,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (canReach)
             {
-                
-
                 if (Input.GetKeyDown(KeyCode.Space))
                     impulsing = true;
                 if (impulsing == true)
+                {
+                    player.charcater.SetTrigger("Climb");
                 player.fpControler.m_CharacterController.Move(Vector3.up * imp);
+                }
+
             }
         }
         private void OnTriggerEnter(Collider other)
@@ -48,6 +50,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             impulsing = false;
             canReach = false;
+
             player.fpControler.m_GravityMultiplier = 2;
         }
     }

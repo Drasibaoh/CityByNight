@@ -27,6 +27,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     actor.walljumps--;
                     Debug.Log(actor.fpControler.m_MoveDir);
                     actor.fpControler.m_MoveDir.y = actor.fpControler.m_JumpSpeed;
+                    actor.charcater.SetTrigger("Jump");
                     jump = true;
                 actor.falling = true;
                 actor.fallHeight = actor.transform.position.y;
@@ -38,16 +39,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         private void OnTriggerEnter(Collider other)
         {
-            jump = false;
-            if (actor==null)
-                actor = other.GetComponent<ControllerAddon>();
-            actor.isOnWall = true;
-            actor.fpControler.m_GravityMultiplier=0;
-            x = actor.rigibody.velocity.x;
-            z = actor.rigibody.velocity.z;
-            isIn = true;
-            actor.rigibody.velocity = Vector3.zero;
-            Invoke("GetOnGround", 0.5f);
+            if (other.CompareTag("Player"))
+            {
+                jump = false;
+                if (actor == null)
+                    actor = other.GetComponent<ControllerAddon>();
+                actor.isOnWall = true;
+                actor.charcater.SetBool("OnWall", true);
+                actor.fpControler.m_GravityMultiplier = 0;
+                x = actor.rigibody.velocity.x;
+                z = actor.rigibody.velocity.z;
+                isIn = true;
+                actor.rigibody.velocity = Vector3.zero;
+                Invoke("GetOnGround", 0.5f);
+            }
+
         }
         public void GetOnGround()
         {
@@ -58,6 +64,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             isIn = false;
             actor.isOnWall = false;
+            actor.charcater.SetBool("OnWall",false);
             if (IsInvoking())
             {
                 CancelInvoke();

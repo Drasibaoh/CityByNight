@@ -17,9 +17,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             sec = GameManager.instance.finalTime;
             min=GameManager.instance.finalMin;
             if (SceneManager.GetActiveScene().buildIndex!=2)
-                time.text = "Tu as délivrer la drogue avec " + min + "minutes et " + (sec - sec % 0.1f) + " secondes d'avances !";
+                time.text = "Tu as délivré la drogue avec " + min + "minutes et " + (sec - sec % 0.1f) + " secondes d'avances !";
             else
-                time.text = "Tu as délivrer la drogue avec " + min + "minutes et " + (sec-sec%0.1f) + " secondes de retard !";
+                time.text = "Tu as délivré la drogue avec " + min + "minutes et " + (sec-sec%0.1f) + " secondes de retard !";
         }
 
         // Update is called once per frame

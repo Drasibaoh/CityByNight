@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class PoliceLight : MonoBehaviour
     {
+        public float maxTime;
         public float timeInLight = 0f;
         public float speed = 1;
         public bool isLost = false;
@@ -30,7 +31,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 timeInLight += Time.deltaTime;
 
-                if (timeInLight >= 0.8f)
+                if (timeInLight >= maxTime)
                 {
                     if (agent != null)
                         agent.navAgent.enabled = true;
@@ -50,7 +51,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     isLost = false;
                 }
             }
-            LightEffect.weight = timeInLight / 1.4f;
+            LightEffect.weight = timeInLight / maxTime;
             
 
         }

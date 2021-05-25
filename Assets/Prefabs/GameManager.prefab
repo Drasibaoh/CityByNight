@@ -46,6 +46,9 @@ MonoBehaviour:
   restart:
     m_PersistentCalls:
       m_Calls: []
+  Over:
+    m_PersistentCalls:
+      m_Calls: []
   end: 0
   obj:
   - {fileID: 0}
@@ -57,3 +60,5 @@ MonoBehaviour:
   - 60
   - 70
   - 30
+  finalTime: 0
+  finalMin: 0
