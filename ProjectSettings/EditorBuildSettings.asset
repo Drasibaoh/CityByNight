@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Travail_Noah.unity
-    guid: d755b728253d394408c7f0a0ec98b87c
   - enabled: 1
     path: Assets/Scenes/Final_Scenes/TitleScene.unity
     guid: abe9329841149174c9185c634d0f1c0c
   - enabled: 1
+    path: Assets/Scenes/Travail_Noah.unity
+    guid: d755b728253d394408c7f0a0ec98b87c
+  - enabled: 0
     path: Assets/Scenes/Final_Scene.unity
     guid: 76da8e9b5d45ab540a69031046e64ba2
   - enabled: 1

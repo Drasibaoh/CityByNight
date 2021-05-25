@@ -8,13 +8,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
     {
         bool hasDelivered;
         bool isInteractable;
+        public int id=0;
         public Text feedback;
         public Text boostedFeedback;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-
+            if (id >= 0)
+            {
+                GameManager.instance.obj[id - 1] = gameObject;
+            }
+            else
+            {
+                Debug.LogError("ID not assigned");
+            }
         }
 
         // Update is called once per frame
@@ -25,8 +33,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (Input.GetKeyDown(KeyCode.E) && !hasDelivered)
                 {
-                    GameManager.instance.ChangeObjectif();
                     hasDelivered = true;
+                    GameManager.instance.ChangeObjectif();
+                    
                     feedback.gameObject.SetActive(false);
                     boostedFeedback.gameObject.SetActive(false);
                 }

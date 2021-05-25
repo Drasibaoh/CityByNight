@@ -121,9 +121,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                         if (m_ControllerAddon.isSliding)
                         {
-                            m_ControllerAddon.GetUp();
-                            m_ControllerAddon.CancelInvoke("GetUp");
-                            m_MoveDir.y = m_JumpSpeed + 2;
+
                         }
                         else
                             m_MoveDir.y = m_JumpSpeed;

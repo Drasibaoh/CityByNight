@@ -68,6 +68,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             walkSpeed = fpControler.m_WalkSpeed;
             spectrCol = Spectrum.color;
             GameManager.instance.restart.AddListener(Death);
+            GameManager.instance.Over.AddListener(Over);
             HD.Play();
             CH.Play();
             CH.Pause();
@@ -99,35 +100,35 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                if (Input.GetKey(KeyCode.Z))
-                {
-                    if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed)
-                        fpControler.m_WalkSpeed += 1 * accel;
-                    else
+                    if (Input.GetKey(KeyCode.Z))
                     {
-                        fpControler.m_WalkSpeed -= 1 * accel;
-                    }
-                }
+                        if (isSliding)
+                        {
 
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed - 7)
-                        fpControler.m_WalkSpeed += 1 * accel;
-                    else
-                    {
-                        fpControler.m_WalkSpeed -= 1 * accel;
+                        }
+                        else
+                        {
+                            if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed)
+                                fpControler.m_WalkSpeed += 1 * accel*Time.deltaTime;
+                            else
+                            {
+                                fpControler.m_WalkSpeed -= 1 * accel * Time.deltaTime;
+                            }
+                        }
+
                     }
-                }
-                else if (Input.GetKey(KeyCode.Q))
-                {
-                    if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed - 7)
-                        fpControler.m_WalkSpeed += 1 * accel;
-                    else
+
+                    else if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D))
                     {
-                        fpControler.m_WalkSpeed -= 1 * accel;
+                        /*if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed - 7)
+                            fpControler.m_WalkSpeed += 1 * accel;
+                        else
+                        {
+                            fpControler.m_WalkSpeed -= 1 * accel;
+                        }*/
+                        fpControler.m_WalkSpeed = 10;
                     }
-                }
-                if (Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.Q))
+                if (Input.GetKeyUp(KeyCode.Z) )
                 {
                     fpControler.m_WalkSpeed = walkSpeed;
                 }
@@ -284,11 +285,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     recoilOver = true;
                 }
             }
+            if (isSliding && Input.GetKeyDown(KeyCode.Space))
+            {
+                CancelInvoke("GetUp");
+                GetUp();
+                fpControler.m_MoveDir.y = fpControler.m_JumpSpeed + 2;
+                Debug.Log("Has Cancelled");
+            }
             if (isSliding)
             {
-                player.Move(transform.forward * 0.1f);
+                Debug.Log(fpControler.m_CharacterController.isGrounded);
+                player.Move(transform.forward * 4*Time.deltaTime);
             }
 
+        }
+        public void Over()
+        {
+            fpControler.m_MouseLook.Init(fpControler.transform, fpControler.m_Camera.transform);
+            fpControler.m_MouseLook.SetCursorLock(false);
+           fpControler.m_MouseLook.lockCursor = false;
         }
         public void DopeTime()
         {
@@ -346,9 +361,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Slide()
         {
-
-            //walkSpeed += 2;
-           // fpControler.m_WalkSpeed = walkSpeed;
+           // fpControler.m_WalkSpeed -=2;
            // fpControler.m_RunSpeed += 2;
             player.center = new Vector3(player.center.x, 0.6f, player.center.z);
             player.height = 1.2f;
@@ -375,9 +388,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
 
-                  //  walkSpeed -= 2;
-                  //  fpControler.m_WalkSpeed = walkSpeed;
-                  //  fpControler.m_RunSpeed -= 2;
+                //  walkSpeed -= 2;
+                  fpControler.m_WalkSpeed -=3;
+                //  fpControler.m_RunSpeed -= 2;
+                //    walkSpeed += 2;
                     player.center = center;
                     slidetime = 0;
                     player.height = height;

@@ -8,6 +8,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class GameManager : MonoBehaviour
     {
         public UnityEvent restart;
+        public UnityEvent Over;
         public bool end=false;
         private float timer=0;
         public static GameManager instance;
@@ -37,27 +38,31 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             delivered--;
           //  timerd.AddTime(timeToAdd[0]);
-            ChangeObjectif();
         }
 
         // Update is called once per frame
         void Update()
         {
             if (end)
-            {
+            {                    
                 timer += Time.deltaTime;
                 if (timer >= 2)
                 {
                     timerd.FinalSave();
                     Debug.Log("fondu");
-                        if (timerd.timer >= 0f)
+                    Over.Invoke();
+
+                    GameReset();
+                    if (timerd.timer >= 0f)
                         {
+                            
                             SceneManager.LoadScene(2);
                         }
                         else
                         {
                             SceneManager.LoadScene(3);
                         }
+                    end = false;
                 }
             }
         }
@@ -80,10 +85,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 Debug.Log("ggwp");
                 end = true;
+
                 obj[delivered - 1].SetActive(false);
 
             }
 
+        }
+        public void GameReset()
+        {
+            timer = 0;
+            delivered = 0;
+            obj.Clear();
+            for (int i=0; i<3;i++)
+                obj.Insert(i,null);
         }
     }
 }

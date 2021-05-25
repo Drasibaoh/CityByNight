@@ -19,8 +19,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Text BoostedLine;
         [SerializeField] GameObject NormalUi;
         // Start is called before the first frame update
+        private void Awake()
+        {
+            GameManager.instance.timerd = this;
+        }
         void Start()
         {
+            GameManager.instance.ChangeObjectif();
             if (maxtimer<=60)
                  timer = maxtimer;
             else

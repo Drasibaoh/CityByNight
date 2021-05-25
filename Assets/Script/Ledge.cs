@@ -22,7 +22,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (canReach)
             {
                 
-                player.fpControler.m_GravityMultiplier = 0.5f;
+
                 if (Input.GetKeyDown(KeyCode.Space))
                     impulsing = true;
                 if (impulsing == true)
@@ -38,7 +38,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Debug.Log("tagged");
                 //play anim
                 canReach = true;
-                if (player.fpControler.m_MoveDir.y>=0)
+                player.fpControler.m_GravityMultiplier = 0.5f;
+                if (player.fpControler.m_MoveDir.y>=-0.5)
                     impulsing=true;
                 Debug.Log("pushed");
             }
