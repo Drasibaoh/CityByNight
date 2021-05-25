@@ -333,6 +333,8 @@ MonoBehaviour:
   isLost: 0
   noMove: 0
   isIn: 0
+  isStatic: 1
+  rotateSpeed: 80
   agent: {fileID: 0}
 --- !u!114 &497856325
 MonoBehaviour:

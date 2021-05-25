@@ -13,6 +13,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool isLost = false;
         public bool noMove;
         public bool isIn;
+        public bool isStatic;
+        public float rotateSpeed;
         public AIAgent agent = null;
         private PostProcessVolume LightEffect;
         private ControllerAddon player;
@@ -52,7 +54,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
             LightEffect.weight = timeInLight / maxTime;
-            
+            if (isStatic)
+            {
+                transform.Rotate(0, 0, rotateSpeed*Time.deltaTime);
+            }
 
         }
         private void OnTriggerEnter(Collider other)

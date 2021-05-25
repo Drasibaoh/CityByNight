@@ -32,6 +32,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (addon==null)
                     addon= other.GetComponent<ControllerAddon>();
                 isIn = true;
+                addon.fpControler.m_GravityMultiplier = 5;
                /* addon.walkSpeed += 2;
                 addon.fpControler.m_WalkSpeed = addon.walkSpeed;
                 addon.fpControler.m_RunSpeed += 2;*/
@@ -44,10 +45,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.CompareTag("Player"))
             {
-              /*  addon.walkSpeed -= 2;
-                addon.fpControler.m_WalkSpeed = addon.walkSpeed;
-                addon.fpControler.m_RunSpeed -= 2;
-                */addon.player.center = addon.center;
+                /*  addon.walkSpeed -= 2;
+                  addon.fpControler.m_WalkSpeed = addon.walkSpeed;
+                  addon.fpControler.m_RunSpeed -= 2;
+                                addon.fpControler.m_GravityMultiplier = 5;
+
+                  */
+                addon.fpControler.m_GravityMultiplier = 2;
+                addon.player.center = addon.center;
                 addon.slidetime = 0;
                 addon.player.height = addon.height;
                 addon.isAutoSliding = false;

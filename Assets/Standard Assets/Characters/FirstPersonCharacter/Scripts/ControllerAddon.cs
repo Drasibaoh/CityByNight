@@ -425,7 +425,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 isSliding = false;
                 headBlock = false;
                 mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y - 1.3f, mesh.transform.position.z);
-                
+                player.Move(transform.up * 4 * Time.deltaTime);
             }
         }
         public void Wait()
