@@ -51,6 +51,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             gameUI.SetActive(false);
             player.enabled = false;
             menu[0].enabled = true;
+            
             transitions[0].Play();
             menu[0].GetComponent<AudioSource>().Play();
             if (player.m_ControllerAddon.isDope)
@@ -84,6 +85,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             gameUI.SetActive(true);
             controlsUI.SetActive(false);
             menu[0].enabled=false;
+            transitions[0].Prepare();
             if (player.m_ControllerAddon.isDope)
             {
                 for (int i = 0; i < boutons.Count; i++)

@@ -13,7 +13,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Text boostedFeedback;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             if (id >= 0)
             {
