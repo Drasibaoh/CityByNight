@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Video;
+using UnityEngine.UI;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
 
@@ -17,6 +18,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool started=false;
         public VideoPlayer spectrum;
         public List<VideoClip> spectrums;
+        public List<string> names;
+        public Text tracklist;
         // Start is called before the first frame update
         void Start()
         {
@@ -76,6 +79,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     started = true;
                     phones.clip = playlist[0];
                     spectrum.clip = spectrums[0];
+                    tracklist.text = names[0];
                     spectrum.Play();
                     phones.Play();
                 }
@@ -100,6 +104,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             playingTrack++;
             if (playingTrack > playlist.Count - 1)
                 playingTrack = 0;
+            tracklist.text = names[playingTrack];
             phones.clip = playlist[playingTrack];
             spectrum.clip = spectrums[playingTrack];
             phones.Play();
@@ -111,6 +116,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             playingTrack--;
             if (playingTrack < 0)
                 playingTrack = playlist.Count - 1;
+            tracklist.text = names[playingTrack];
             phones.clip = playlist[playingTrack];
             spectrum.clip = spectrums[playingTrack];
             phones.Play();

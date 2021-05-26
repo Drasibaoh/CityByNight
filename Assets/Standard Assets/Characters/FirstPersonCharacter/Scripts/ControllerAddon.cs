@@ -59,6 +59,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool started=false;
         public bool isRecoiling = false;
         public GameObject mesh;
+        private Playlist playlist;
         // Start is called before the first frame update
         void Start()
         {
@@ -69,6 +70,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             center = player.center;
             walkSpeed = fpControler.m_WalkSpeed;
             spectrCol = Spectrum.color;
+            playlist = GetComponentInChildren<Playlist>();
+            Debug.Log(playlist);
             GameManager.instance.restart.AddListener(Death);
             GameManager.instance.Over.AddListener(Over);
             HD.Play();
@@ -106,7 +109,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     {
                         if (isSliding)
                         {
-                            charcater.SetFloat("z", 1);
+                            
                         }
                         else
                         {
@@ -116,11 +119,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             {
                                 fpControler.m_WalkSpeed -= 1 * accel * Time.deltaTime;
                             }
+                            charcater.SetFloat("z", 1);
                         }
 
                     }
 
-                    else if (Input.GetKey(KeyCode.Q))
+                    else if (Input.GetKeyDown(KeyCode.Q))
                     {
                         /*if (fpControler.m_WalkSpeed <= fpControler.m_RunSpeed - 7)
                             fpControler.m_WalkSpeed += 1 * accel;
@@ -130,12 +134,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         }*/
                         fpControler.m_WalkSpeed = 10;
                         charcater.SetFloat("X", 1);
+                        mesh.transform.position = new Vector3(mesh.transform.position.x+0.2f, mesh.transform.position.y, mesh.transform.position.z);
+                        mesh.transform.Rotate(new Vector3(0,-90,0));
                     }
                     else if (Input.GetKeyDown(KeyCode.D))
                     {
                         fpControler.m_WalkSpeed = 10;
                         charcater.SetFloat("X", -1);
+                        mesh.transform.position = new Vector3(mesh.transform.position.x-0.2f, mesh.transform.position.y, mesh.transform.position.z);
+                        mesh.transform.Rotate(new Vector3(0, 90, 0));
                     }
+
+                
                     else if (Input.GetKeyDown(KeyCode.S))
                     {
                         charcater.SetFloat("z", -1);
@@ -149,10 +159,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     else if (Input.GetKeyUp(KeyCode.Q))
                     {
                         charcater.SetFloat("X", 0);
+                        mesh.transform.position = new Vector3(mesh.transform.position.x - 0.2f, mesh.transform.position.y, mesh.transform.position.z);
+                        mesh.transform.Rotate(new Vector3(0, 90, 0));
+
                     }
                     else if (Input.GetKeyUp(KeyCode.D))
                     {
                         charcater.SetFloat("X", 0);
+                        mesh.transform.position = new Vector3(mesh.transform.position.x + 0.2f, mesh.transform.position.y, mesh.transform.position.z) ;
+                        mesh.transform.Rotate(new Vector3(0, -90, 0));
+
                     }
                     else if (Input.GetKeyUp(KeyCode.S))
                     {
@@ -225,6 +241,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                             dose[i].color = Color.clear;
                         }
                     }
+                    playlist.tracklist.color = new Color(0.7f, 1f, 0.7f);
                     Spectrum.color = new Color(0.7f,1f,0.7f);
                     HUD.color = new Color(0.7f, 1f, 0.7f);
                     CrossHair.color = new Color(0.7f, 1, 0.7f);
@@ -354,6 +371,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             HUD.color = Color.white;
             CrossHair.color = Color.white;
             Spectrum.color = spectrCol;
+            playlist.tracklist.color = new Color(0.07843138f, 0.7098039f, 0.6627451f);
             BoostedUi.SetActive(false);
             NormalUi.SetActive(true);
             added.clip = exhaustion;
