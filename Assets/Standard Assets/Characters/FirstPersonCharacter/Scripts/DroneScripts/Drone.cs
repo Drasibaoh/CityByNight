@@ -12,9 +12,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AIAgent agent;
         void Start()
         {
-           /* goTo.transform.position = this.transform.position;
+            goTo.transform.position = this.transform.position;
             goTo.transform.rotation = this.transform.rotation;
-            goTo.transform.localScale = this.transform.localScale;*/
+            goTo.transform.localScale = this.transform.localScale;
             pLight = GetComponentInChildren<PoliceLight>();
             agent = GetComponent<AIAgent>();
             GameManager.instance.restart.AddListener(OnReset);
