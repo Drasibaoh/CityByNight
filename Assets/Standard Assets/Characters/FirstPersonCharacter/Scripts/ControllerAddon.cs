@@ -27,6 +27,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float deathFall;
         public bool falling;
         public int DopeCount = 3;
+        public float slideHeight=1.2f;
         public bool isSliding;
         public bool isAutoSliding;
         public bool headBlock;
@@ -408,8 +409,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
            // fpControler.m_WalkSpeed -=2;
            // fpControler.m_RunSpeed += 2;
             player.center = new Vector3(player.center.x, 0.6f, player.center.z);
-            player.height = 1.2f;
-            mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y+1.3f, mesh.transform.position.z);
+            player.height = slideHeight;
+            mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y+slideHeight, mesh.transform.position.z);
             isSliding = true;
             charcater.SetTrigger("Slide");
 
@@ -442,7 +443,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 player.height = height;
                 isSliding = false;
                 headBlock = false;
-                mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y - 1.3f, mesh.transform.position.z);
+                mesh.transform.position = new Vector3(mesh.transform.position.x, mesh.transform.position.y - slideHeight, mesh.transform.position.z);
                 player.Move(transform.up * 4 * Time.deltaTime);
             }
         }

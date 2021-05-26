@@ -78,7 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void Stop()
         {
-
+            menu[0].gameObject.SetActive(true);
             player.m_ControllerAddon.StopSound();
             crosshair.Stop();
             gameUI.SetActive(false);
@@ -130,6 +130,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             for (int i = 0; i < menu.Count; i++)
             {
                 transitions[i].frame = 0;
+                menu[i].gameObject.SetActive(false);
                 //transitions[i].Prepare();
             }
 
