@@ -3557,6 +3557,18 @@ Transform:
   m_Father: {fileID: 2087163612}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 33.583, y: 0, z: 0}
+--- !u!114 &497071135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1715399998845142205, guid: f5ad4693ad939b74da5a1664cf1abea3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5029037358519053815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &517559522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58703,17 +58715,17 @@ PrefabInstance:
     - target: {fileID: 3293076228663246547, guid: 2125306a3e4c9cf4ab4d5bf99df61299,
         type: 3}
       propertyPath: accel
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3293076228969914238, guid: 2125306a3e4c9cf4ab4d5bf99df61299,
         type: 3}
       propertyPath: m_RunSpeed
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3293076228969914238, guid: 2125306a3e4c9cf4ab4d5bf99df61299,
         type: 3}
       propertyPath: m_WalkSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3293076228977663838, guid: 2125306a3e4c9cf4ab4d5bf99df61299,
         type: 3}
@@ -58800,11 +58812,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 137077426, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
       propertyPath: m_WaitForFirstFrame
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 137077426, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137077426, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 738502052, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
       propertyPath: m_AnchorMin.y
@@ -58864,11 +58880,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507690976, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
       propertyPath: m_WaitForFirstFrame
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1507690976, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507690976, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1561272406, guid: f5ad4693ad939b74da5a1664cf1abea3, type: 3}
       propertyPath: transitions.Array.size
@@ -58939,6 +58959,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1285947631}
+    - target: {fileID: 697359630616861771, guid: f5ad4693ad939b74da5a1664cf1abea3,
+        type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 497071135}
+    - target: {fileID: 777738410690164622, guid: f5ad4693ad939b74da5a1664cf1abea3,
+        type: 3}
+      propertyPath: m_SkipOnDrop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 858657433231947047, guid: f5ad4693ad939b74da5a1664cf1abea3,
         type: 3}
       propertyPath: m_SkipOnDrop
@@ -58949,6 +58979,17 @@ PrefabInstance:
       propertyPath: m_WaitForFirstFrame
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 858657433231947047, guid: f5ad4693ad939b74da5a1664cf1abea3,
+        type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 858657433231947047, guid: f5ad4693ad939b74da5a1664cf1abea3,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: b9eca1d76d83d3144bd151ce0d7a9db6,
+        type: 3}
     - target: {fileID: 1310028535183431313, guid: f5ad4693ad939b74da5a1664cf1abea3,
         type: 3}
       propertyPath: m_Name

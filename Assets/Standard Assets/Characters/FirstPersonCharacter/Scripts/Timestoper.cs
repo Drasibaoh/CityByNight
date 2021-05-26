@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.UI;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
 
@@ -11,6 +12,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] FirstPersonController player;
         ControllerAddon addon;
         VideoPlayer play;
+        public RawImage image;
         int waiter = 0;
         public bool end = false;
         private void Awake()
@@ -45,6 +47,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         end = true;
                         addon.enabled = true;
                         player.enabled=true;
+                        image.gameObject.SetActive(false);
                     }
                 }
                 else
