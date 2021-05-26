@@ -427,18 +427,9 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 322cbc7c8a19cec4892f222265e23531,
-      type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 1}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Blend
-    m_Mirror: 0
-  - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 9271671faa1289b48847b00d499575d6,
       type: 3}
-    m_Threshold: 0.25
+    m_Threshold: 0
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -447,8 +438,17 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: a81e39b1209d5b445a0ad2dad2c5051b,
       type: 3}
-    m_Threshold: 0.5
+    m_Threshold: 0.25
     m_Position: {x: 1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 322cbc7c8a19cec4892f222265e23531,
+      type: 3}
+    m_Threshold: 0.5
+    m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -463,7 +463,8 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 0}
+    m_Motion: {fileID: -203655887218126122, guid: 10db4ae2e0f6a9c438b3afe40ad3c3cf,
+      type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -703,13 +704,13 @@ AnimatorStateMachine:
     m_Position: {x: 710, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1266135983177914573}
-    m_Position: {x: 420, y: 110, z: 0}
+    m_Position: {x: 460, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6163497877182938509}
-    m_Position: {x: 170, y: -130, z: 0}
+    m_Position: {x: 190, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5572238064165265279}
-    m_Position: {x: 530, y: -180, z: 0}
+    m_Position: {x: 710, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1448692175094634717}
     m_Position: {x: 190, y: 190, z: 0}
