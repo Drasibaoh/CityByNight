@@ -30,7 +30,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             transitions[1].Prepare();
             for (int i = 0; i < menu.Count; i++)
             {
-
+                menu[i].gameObject.SetActive(false);
             }
         }
 
@@ -149,6 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             player.m_MouseLook.SetCursorLock(true);
             player.m_MouseLook.lockCursor = true;
             list.Resume();
+            isPaused = false;
         }
         public void Controls()
         {

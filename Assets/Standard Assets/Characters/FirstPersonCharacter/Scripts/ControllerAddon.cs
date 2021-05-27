@@ -95,7 +95,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                GameManager.instance.restart.Invoke();
+                respawnPoint.Death();
+                //GameManager.instance.restart.Invoke();
             }
 
             else
