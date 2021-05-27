@@ -136,14 +136,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         }*/
                         fpControler.m_WalkSpeed = 10;
                         charcater.SetFloat("X", 1);
-                        mesh.transform.position = new Vector3(mesh.transform.position.x+0.2f, mesh.transform.position.y, mesh.transform.position.z);
+                        //mesh.transform.position = new Vector3(mesh.transform.position.x+0.2f, mesh.transform.position.y, mesh.transform.position.z);
                         mesh.transform.Rotate(new Vector3(0,-90,0));
                     }
                     else if (Input.GetKeyDown(KeyCode.D))
                     {
                         fpControler.m_WalkSpeed = 10;
                         charcater.SetFloat("X", -1);
-                        mesh.transform.position = new Vector3(mesh.transform.position.x-0.2f, mesh.transform.position.y, mesh.transform.position.z);
+                        //mesh.transform.position = new Vector3(mesh.transform.position.x-0.2f, mesh.transform.position.y, mesh.transform.position.z);
                         mesh.transform.Rotate(new Vector3(0, 90, 0));
                     }
 
@@ -161,14 +161,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     else if (Input.GetKeyUp(KeyCode.Q))
                     {
                         charcater.SetFloat("X", 0);
-                        mesh.transform.position = new Vector3(mesh.transform.position.x - 0.2f, mesh.transform.position.y, mesh.transform.position.z);
+                        //mesh.transform.position = new Vector3(mesh.transform.position.x - 0.2f, mesh.transform.position.y, mesh.transform.position.z);
                         mesh.transform.Rotate(new Vector3(0, 90, 0));
 
                     }
                     else if (Input.GetKeyUp(KeyCode.D))
                     {
                         charcater.SetFloat("X", 0);
-                        mesh.transform.position = new Vector3(mesh.transform.position.x + 0.2f, mesh.transform.position.y, mesh.transform.position.z) ;
+                        //mesh.transform.position = new Vector3(mesh.transform.position.x + 0.2f, mesh.transform.position.y, mesh.transform.position.z) ;
                         mesh.transform.Rotate(new Vector3(0, -90, 0));
 
                     }
