@@ -470,7 +470,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             fpControler.m_WalkSpeed = walkSpeed;
             fpControler.m_RunSpeed = 15;
             fpControler.m_JumpSpeed = 7;
-            
+            mesh.transform.rotation = new Quaternion(0,0,0,0);
             isDope = false;
             DopePP.weight = 0;
             RecoilPP.weight = 0;
