@@ -134,14 +134,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         {
                             fpControler.m_WalkSpeed -= 1 * accel;
                         }*/
-                        fpControler.m_WalkSpeed = 10;
+                        fpControler.m_WalkSpeed = fpControler.m_RunSpeed-fpControler.m_RunSpeed*0.5f;
                         charcater.SetFloat("X", 1);
                         //mesh.transform.position = new Vector3(mesh.transform.position.x+0.2f, mesh.transform.position.y, mesh.transform.position.z);
                         mesh.transform.Rotate(new Vector3(0,-90,0));
                     }
                     else if (Input.GetKeyDown(KeyCode.D))
                     {
-                        fpControler.m_WalkSpeed = 10;
+                        fpControler.m_WalkSpeed = fpControler.m_RunSpeed - fpControler.m_RunSpeed * 0.5f;
                         charcater.SetFloat("X", -1);
                         //mesh.transform.position = new Vector3(mesh.transform.position.x-0.2f, mesh.transform.position.y, mesh.transform.position.z);
                         mesh.transform.Rotate(new Vector3(0, 90, 0));
@@ -151,6 +151,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     else if (Input.GetKeyDown(KeyCode.S))
                     {
                         charcater.SetFloat("z", -1);
+                        fpControler.m_WalkSpeed = walkSpeed;
                     }
 
                     if (Input.GetKeyUp(KeyCode.Z))
@@ -249,6 +250,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     CrossHair.color = new Color(0.7f, 1, 0.7f);
                     added.clip = gulp;
                     added.Play();
+                    
                     NormalUi.SetActive(false);
                     BoostedUi.SetActive(true);
                     isDope = true;
@@ -378,7 +380,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             NormalUi.SetActive(true);
             added.clip = exhaustion;
             added.Play();
-            added.loop = true;
+            //added.loop = true;
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             walkSpeed -= 3;
