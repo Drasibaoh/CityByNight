@@ -15,6 +15,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public RawImage image;
         int waiter = 0;
         public bool end = false;
+        public GameObject introText;
         private void Awake()
         {
             if (instance == null)
@@ -32,6 +33,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Invoke("GoBack", 2f);
             player.enabled=false;
             addon.enabled = false;
+            addon.fpControler.m_MouseLook.SetCursorLock(false);
+            Cursor.visible = true;
         }
 
         // Update is called once per frame
@@ -43,11 +46,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     if (!play.isPlaying)
                     {
-                        GoBack();
-                        end = true;
-                        addon.enabled = true;
-                        player.enabled=true;
-                        image.gameObject.SetActive(false);
+                        introText.SetActive(true);
+
+
                     }
                 }
                 else
@@ -60,6 +61,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             Time.timeScale = 1f;
         }
+        public void Exit()
+        { 
+            GoBack();
+                        end = true;
+                        addon.enabled = true;
+                        player.enabled=true;
+                        image.gameObject.SetActive(false);
+            addon.fpControler.m_MouseLook.SetCursorLock(true);
+            Cursor.visible = false;
+            introText.SetActive(false);
 
+        }
     }
 }

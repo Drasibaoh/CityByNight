@@ -23,9 +23,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool isTransIn;
         bool isTransOut;
         Color actColor = Color.white;
+        bool begin = false;
+        public RawImage CH;
+        public RawImage HD;
         // Start is called before the first frame update
         void Start()
         {
+            HideAll();
             GameManager.instance.restart.AddListener(Game);
             transitions[1].Prepare();
             for (int i = 0; i < menu.Count; i++)
@@ -68,6 +72,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             if (Timestoper.instance.end)
             {
+                if (!begin)
+                {
+                    ShowAll();
+                    begin = true;
+                }
                 if (Input.GetKeyDown(KeyCode.Escape) && !isStopped)
                 {
                     Stop();
@@ -78,6 +87,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
 
+        }
+        public void HideAll()
+        {
+pauseUI.SetActive(false);
+            gameUI.SetActive(false);
+            controlsUI.SetActive(false);
+            menu[0].gameObject.SetActive(false);
+            HD.gameObject.SetActive(false);
+            CH.gameObject.SetActive(false);
+        }
+        public void ShowAll()
+        {
+            HD.gameObject.SetActive(true);
+            CH.gameObject.SetActive(true);
+            gameUI.SetActive(true);
         }
         public void Stop()
         {
