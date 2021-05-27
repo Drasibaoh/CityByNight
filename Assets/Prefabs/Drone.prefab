@@ -200,7 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a29e83ecff74499f7c0cd55dfb3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goTo: {fileID: 0}
   steps: 0
 --- !u!1 &8319708908857446007
 GameObject:
