@@ -33,7 +33,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 menu[i].gameObject.SetActive(false);
             }
         }
-
+        private void OnDestroy()
+        {
+            GameManager.instance.GameReset();
+        }
         // Update is called once per frame
         void Update()
         {

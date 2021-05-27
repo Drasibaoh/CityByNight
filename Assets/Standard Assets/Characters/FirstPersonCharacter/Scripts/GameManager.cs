@@ -32,11 +32,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Destroy(this.gameObject);
             }
             restart = new UnityEvent();
+
+            delivered--;
         }
         // Start is called before the first frame update
         void Start()
         {
-            delivered--;
+
           //  timerd.AddTime(timeToAdd[0]);
         }
 
@@ -94,7 +96,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void GameReset()
         {
             timer = 0;
-            delivered = 0;
+            delivered = -1;
             obj.Clear();
             for (int i=0; i<3;i++)
                 obj.Insert(i,null);

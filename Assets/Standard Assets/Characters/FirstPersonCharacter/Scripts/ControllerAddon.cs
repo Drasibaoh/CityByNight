@@ -254,10 +254,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     isDope = true;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
-                    walkSpeed += 10;
+                    walkSpeed += 5;
                     fpControler.m_WalkSpeed = walkSpeed;
-                    fpControler.m_RunSpeed += 10;
-                    fpControler.m_JumpSpeed += 3;
+                    fpControler.m_RunSpeed += 5;
+                    fpControler.m_JumpSpeed += 1;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
                     Invoke("DopeTime", dopetime);
@@ -355,10 +355,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             isDope=false;
-            walkSpeed -= 10;
+            walkSpeed -=5;
             fpControler.m_WalkSpeed = walkSpeed;
-            fpControler.m_RunSpeed -= 10;
-            fpControler.m_JumpSpeed -= 3;
+            fpControler.m_RunSpeed -= 5;
+            fpControler.m_JumpSpeed -= 1;
             Debug.Log("walk speed"+fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             DopeDownTime();
@@ -457,6 +457,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             HUD.color = Color.white;
             CrossHair.color = Color.white;
             Spectrum.color = new Color(0.1019608f, 0.7490196f, 0.7490196f);
+            playlist.tracklist.color = new Color(0.07843138f, 0.7098039f, 0.6627451f);
             BoostedUi.SetActive(false);
             NormalUi.SetActive(true);
             BoostBar.transform.localScale = Vector3.one;
@@ -474,6 +475,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             isDope = false;
             DopePP.weight = 0;
             RecoilPP.weight = 0;
+            added.clip = null;
             CancelInvoke();
         }
         public void StopSound()

@@ -11,7 +11,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public int id=0;
         public Text feedback;
         public Text boostedFeedback;
-
+        public GameObject trappe;
         // Start is called before the first frame update
         void Start()
         {
@@ -38,6 +38,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     isInteractable = false;
                     feedback.gameObject.SetActive(false);
                     boostedFeedback.gameObject.SetActive(false);
+                    trappe.gameObject.SetActive(true);
                 }
             }
         }

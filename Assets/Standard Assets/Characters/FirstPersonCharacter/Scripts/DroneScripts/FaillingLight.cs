@@ -12,11 +12,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float onTime = 2f;
         public bool off;
         private float timer = 0f;
-
+        PoliceLight drone;
         // Start is called before the first frame update
         void Start()
         {
-            
+            drone = droneLight.GetComponent<PoliceLight>();
         }
 
         // Update is called once per frame
@@ -37,6 +37,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 timer += Time.deltaTime;
                 if (timer >= onTime)
                 {
+                    drone.timeInLight = 0;
                     droneLight.SetActive(false);
                     timer = 0;
                     off = !off;
