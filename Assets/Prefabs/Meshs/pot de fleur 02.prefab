@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3281415495679387481}
   - component: {fileID: 1884252406865307900}
   - component: {fileID: 4450333637722856502}
+  - component: {fileID: 1859111034}
   m_Layer: 0
   m_Name: pot de fleur 02
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2792863633533500899}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -131.29, y: 12.34, z: -1.0796}
   m_LocalScale: {x: 7.295905, y: 7.295905, z: 7.295905}
   m_Children: []
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1859111034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792863633533500899}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13507226, y: 0.27631977, z: 0.15131848}
+  m_Center: {x: -0.0049948357, y: 0.13815989, z: 0.0019276068}
