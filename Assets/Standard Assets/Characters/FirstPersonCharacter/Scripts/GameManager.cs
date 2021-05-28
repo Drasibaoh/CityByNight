@@ -72,6 +72,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             
             delivered++;
+            Debug.Log(delivered);
             if (delivered < obj.Count)
             {
                 for (int i = 0; i < obj.Count ; i++)

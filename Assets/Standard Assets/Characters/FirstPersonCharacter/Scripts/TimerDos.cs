@@ -22,7 +22,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool start = false;
         void Start()
         {
-
+            GameManager.instance.timerd = this;
+            GameManager.instance.ChangeObjectif();
             // AddTime(35f);
             Debug.Log("done");
             start = true;
@@ -43,7 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!start)
             {            
                 GameManager.instance.timerd = this;
-                GameManager.instance.ChangeObjectif();
+            GameManager.instance.ChangeObjectif();
                 timer = maxtimer;
                 start = true;
                 SaveTimer();
