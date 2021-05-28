@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (SceneManager.GetActiveScene().buildIndex==2)
                 time.text = "Tu as délivré la marchandise avec " + min + " minutes et " + (sec - sec % 0.1f) + " secondes d'avances !";
             else
-                time.text = "Vous avez échoué as délivré la marchandise dans les temps avec " + min + " minutes et " + (sec-sec%0.1f) + " secondes de retard !";
+                time.text = "Vous avez échoué as délivrer la marchandise dans les temps avec " + min + " minutes et " + (sec-sec%0.1f) + " secondes de retard !";
         }
 
         // Update is called once per frame

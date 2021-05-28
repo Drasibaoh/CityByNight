@@ -256,10 +256,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     isDope = true;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
-                    walkSpeed += 5;
+                    walkSpeed +=7;
                     fpControler.m_WalkSpeed = walkSpeed;
-                    fpControler.m_RunSpeed += 5;
-                    fpControler.m_JumpSpeed += 1;
+                    fpControler.m_RunSpeed += 7;
+                    fpControler.m_JumpSpeed += 2;
                     Debug.Log("walk speed" + fpControler.m_WalkSpeed);
                     Debug.Log("Run speed" + fpControler.m_RunSpeed);
                     Invoke("DopeTime", dopetime);
@@ -301,7 +301,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                dopetime = 10;
+                dopetime = 8;
                 t -= 0.4f * Time.deltaTime;
                 t = Mathf.Clamp(t, 0, 1);
                 
@@ -357,10 +357,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Debug.Log("walk speed" + fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             isDope=false;
-            walkSpeed -=5;
+            walkSpeed -=7;
             fpControler.m_WalkSpeed = walkSpeed;
-            fpControler.m_RunSpeed -= 5;
-            fpControler.m_JumpSpeed -= 1;
+            fpControler.m_RunSpeed -= 7;
+            fpControler.m_JumpSpeed -= 2;
             Debug.Log("walk speed"+fpControler.m_WalkSpeed);
             Debug.Log("Run speed" + fpControler.m_RunSpeed);
             DopeDownTime();

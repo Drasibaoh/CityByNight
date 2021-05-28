@@ -40,7 +40,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Debug.Log("tagged");
                 //play anim
                 canReach = true;
-                player.fpControler.m_GravityMultiplier = 0.5f;
+
                 if (player.fpControler.m_MoveDir.y>=-0.5)
                     impulsing=true;
                 Debug.Log("pushed");
