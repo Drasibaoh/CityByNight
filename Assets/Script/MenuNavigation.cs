@@ -48,6 +48,12 @@ public class MenuNavigation : MonoBehaviour
         cred.Play();
         hasStarted = true;
     }
+    public void Skip()
+    {
+        cred.frame = 0;
+        cred.Pause();
+        image.gameObject.SetActive(false);
+    }
     public void Lose()
     {
         SceneManager.LoadScene(3);

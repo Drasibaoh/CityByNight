@@ -19,11 +19,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Text BoostedLine;
         [SerializeField] GameObject NormalUi;
         // Start is called before the first frame update
-       
+        bool start = false;
         void Start()
         {
-            GameManager.instance.timerd = this;
-            GameManager.instance.ChangeObjectif();
+
+            // AddTime(35f);
+            Debug.Log("done");
+            start = true;
             if (maxtimer<=60)
                  timer = maxtimer;
             else
@@ -38,6 +40,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         void Update()
         {
+            if (!start)
+            {            
+                GameManager.instance.timerd = this;
+                GameManager.instance.ChangeObjectif();
+                timer = maxtimer;
+                start = true;
+                SaveTimer();
+            }
             if (!GameManager.instance.end)
             {
                 timer -= 1 * Time.deltaTime;

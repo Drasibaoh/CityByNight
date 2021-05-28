@@ -95,7 +95,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         public void GameReset()
         {
-            timer = 0;
+            //timerd.AddTime(35);
             delivered = -1;
             obj.Clear();
             for (int i=0; i<3;i++)
