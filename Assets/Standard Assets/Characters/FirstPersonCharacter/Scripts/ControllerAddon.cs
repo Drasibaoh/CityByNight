@@ -332,7 +332,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     recoilOver = true;
                 }
             }
-            if (isSliding && Input.GetKeyDown(KeyCode.Space))
+            if (isSliding && Input.GetKeyDown(KeyCode.Space)&& fpControler.m_CharacterController.isGrounded)
             {
                 CancelInvoke("GetUp");
                 GetUp();
